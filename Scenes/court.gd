@@ -9,17 +9,17 @@ func _process(delta):
 	$player2_score.text = str(p2_score)
 	victory()
 
-
 func _on_player_1_goal_body_entered(body):
 	if body.name == "Ball":
-		$Ball.position = Vector2(300,300)
-		p2_score += 1;
+		body.reset()
+		p2_score += 1
+
 
 func _on_player_2_goal_body_entered(body):
 	if body.name == "Ball":
-		$Ball.position = Vector2(300,300)
-		p1_score += 1;
-		
+		body.reset()
+		p1_score += 1
+
 func victory():
 	if( p1_score >= 10):
 		print("p1 wins")
