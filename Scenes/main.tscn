@@ -1,0 +1,19 @@
+[gd_scene load_steps=5 format=3 uid="uid://cbinesnlun262"]
+
+[ext_resource type="PackedScene" uid="uid://dyenm6yugkrnq" path="res://Scenes/court.tscn" id="1_sfp5v"]
+[ext_resource type="PackedScene" uid="uid://c2qi7rf5gffjc" path="res://Scenes/player.tscn" id="2_nmpvj"]
+[ext_resource type="Script" path="res://Scenes/player2.gd" id="3_q8it8"]
+[ext_resource type="PackedScene" uid="uid://bsnjdg0rcr3mh" path="res://Scenes/ball.tscn" id="3_rv56s"]
+
+[node name="Main" type="Node2D"]
+
+[node name="Court" parent="." instance=ExtResource("1_sfp5v")]
+
+[node name="Player" parent="Court" instance=ExtResource("2_nmpvj")]
+position = Vector2(52, 128)
+
+[node name="Player2" parent="Court" instance=ExtResource("2_nmpvj")]
+position = Vector2(550, 133)
+script = ExtResource("3_q8it8")
+
+[node name="Ball" parent="Court" instance=ExtResource("3_rv56s")]
