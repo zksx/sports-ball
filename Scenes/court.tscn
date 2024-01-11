@@ -1,8 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://dyenm6yugkrnq"]
+[gd_scene load_steps=4 format=3 uid="uid://dyenm6yugkrnq"]
 
-[ext_resource type="Script" path="res://Scenes/court.gd" id="1_4yym8"]
 [ext_resource type="Texture2D" uid="uid://djegc3ellrtlc" path="res://Assets/blue-court.png" id="1_m06tw"]
-[ext_resource type="FontFile" uid="uid://cue5jsjwp7yi0" path="res://Assets/monogram.ttf" id="3_2ctc1"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_351wq"]
 b = Vector2(3.05176e-05, 642)
@@ -10,11 +8,7 @@ b = Vector2(3.05176e-05, 642)
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_d2vky"]
 b = Vector2(0, 295)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_nybt0"]
-size = Vector2(44, 293)
-
-[node name="Court" type="Node"]
-script = ExtResource("1_4yym8")
+[node name="Court" type="Node2D"]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(320, 180)
@@ -56,51 +50,3 @@ collision_mask = 0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Net"]
 position = Vector2(315, 33)
 shape = SubResource("SegmentShape2D_d2vky")
-
-[node name="Player1Goal" type="Area2D" parent="."]
-collision_layer = 8
-metadata/_edit_group_ = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player1Goal"]
-position = Vector2(50, 181.5)
-shape = SubResource("RectangleShape2D_nybt0")
-
-[node name="Player2Goal" type="Area2D" parent="."]
-position = Vector2(538, -3)
-collision_layer = 8
-metadata/_edit_group_ = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player2Goal"]
-position = Vector2(50, 181.5)
-shape = SubResource("RectangleShape2D_nybt0")
-
-[node name="Control" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="player2_score" type="Label" parent="."]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_right = 20.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_fonts/font = ExtResource("3_2ctc1")
-horizontal_alignment = 1
-
-[node name="player1_score" type="Label" parent="."]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_right = -20.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_fonts/font = ExtResource("3_2ctc1")
-horizontal_alignment = 1
-
-[connection signal="body_entered" from="Player1Goal" to="." method="_on_player_1_goal_body_entered"]
-[connection signal="body_entered" from="Player2Goal" to="." method="_on_player_2_goal_body_entered"]
