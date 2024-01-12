@@ -11,8 +11,8 @@ func _physics_process(delta):
 		move_and_collide(reflect)
 
 func launch():
-	set_velocity(Vector2(100, -20))
+	set_velocity(Vector2(-100, -20))
 
 func reset():
 	self.position = Vector2(320,180)
-	set_velocity(Vector2(100, 20))
+	set_velocity(Vector2(-100, 20))

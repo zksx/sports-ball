@@ -9,7 +9,6 @@ var p2_score = 0
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass
-	#gameManager.connect()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
@@ -22,7 +21,6 @@ func _on_player_1_goal_body_entered(body):
 		body.reset()
 		p2_score += 1
 
-
 func _on_player_2_goal_body_entered(body):
 	if body.name == "Ball":
 		body.reset()
@@ -34,3 +32,4 @@ func victory():
 		print("p1 wins")
 	elif (p2_score >= 10):
 		print("p2 wins")
+
