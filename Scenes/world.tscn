@@ -36,22 +36,23 @@ metadata/_edit_group_ = true
 position = Vector2(50, 181.5)
 shape = SubResource("RectangleShape2D_62tf4")
 
-[node name="player1_score" type="Label" parent="."]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_right = -1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_fonts/font = ExtResource("2_fmskm")
-horizontal_alignment = 1
-
 [node name="player2_score" type="Label" parent="."]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_right = 1.0
 offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_fmskm")
+horizontal_alignment = 1
+
+[node name="player1_score" type="Label" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 13.0
+offset_right = 12.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("2_fmskm")

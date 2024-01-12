@@ -13,8 +13,8 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	#$player1_score.text = str(p1_score)
-	#$player2_score.text = str(p2_score)
+	$player1_score.text = str(p1_score)
+	$player2_score.text = str(p2_score)
 	pass
 
 func _on_player_1_goal_body_entered(body):
