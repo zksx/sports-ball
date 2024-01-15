@@ -11,10 +11,9 @@ size = Vector2(44, 293)
 
 [node name="World" type="Node"]
 script = ExtResource("1_7nysg")
+Ball = ExtResource("2_3wgox")
 
 [node name="Court" parent="." instance=ExtResource("1_a0ook")]
-
-[node name="Ball" parent="Court" instance=ExtResource("2_3wgox")]
 
 [node name="Player" parent="Court" instance=ExtResource("3_gc2bj")]
 position = Vector2(90, 195)

@@ -5,10 +5,11 @@ var p1_score = 0
 var p2_score = 0
 
 @export var PlayerScene : PackedScene
+@export var Ball : PackedScene
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass
+	ball_spawn()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
@@ -33,3 +34,7 @@ func victory():
 	elif (p2_score >= 10):
 		print("p2 wins")
 
+func ball_spawn():
+	var ball = Ball.instantiate()
+	add_child(ball)
+	ball.serve()

@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 func _ready():
-	launch()
+	pass
 
 func _physics_process(delta):
 	var collison_info = move_and_collide(velocity * delta)
@@ -10,9 +10,13 @@ func _physics_process(delta):
 		velocity = velocity.bounce(collison_info.get_normal())
 		move_and_collide(reflect)
 
-func launch():
+func serve():
+	self.position = Vector2(320,180)
 	set_velocity(Vector2(-100, -20))
 
 func reset():
 	self.position = Vector2(320,180)
 	set_velocity(Vector2(-100, 20))
+	
+func launch(x,y):
+	set_velocity(Vector2(x, y))
