@@ -13,10 +13,11 @@ func _physics_process(delta):
 func serve():
 	self.position = Vector2(320,180)
 	set_velocity(Vector2(-100, -20))
+	
 
 func reset():
 	self.position = Vector2(320,180)
 	set_velocity(Vector2(-100, 20))
 	
-func launch(x,y):
-	set_velocity(Vector2(x, y))
+func launch(vector):
+	set_velocity(vector)
