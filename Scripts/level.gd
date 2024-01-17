@@ -1,10 +1,8 @@
 extends Node
 
-var gameManager = load("res://Scenes/game_manager.tres")
 var p1_score = 0
 var p2_score = 0
 
-@export var PlayerScene : PackedScene
 @export var Ball : PackedScene
 
 # Called when the node enters the scene tree for the first time.
@@ -13,8 +11,8 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	$player1_score.text = str(p1_score)
-	$player2_score.text = str(p2_score)
+	$"../player2_score".text = str(p1_score)
+	$"../player1_score".text = str(p2_score)
 	pass
 
 func _on_player_1_goal_body_entered(body):

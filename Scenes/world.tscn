@@ -4,19 +4,16 @@
 [ext_resource type="PackedScene" uid="uid://dyenm6yugkrnq" path="res://Scenes/court.tscn" id="1_a0ook"]
 [ext_resource type="PackedScene" uid="uid://bsnjdg0rcr3mh" path="res://Scenes/ball.tscn" id="2_3wgox"]
 [ext_resource type="FontFile" uid="uid://cue5jsjwp7yi0" path="res://Assets/monogram.ttf" id="2_fmskm"]
-[ext_resource type="PackedScene" uid="uid://c2qi7rf5gffjc" path="res://Scenes/player.tscn" id="3_gc2bj"]
+[ext_resource type="PackedScene" uid="uid://dcl25j4cfg0yn" path="res://Scenes/player2.tscn" id="4_c32g0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_62tf4"]
 size = Vector2(44, 293)
 
 [node name="World" type="Node"]
-script = ExtResource("1_7nysg")
-Ball = ExtResource("2_3wgox")
 
 [node name="Court" parent="." instance=ExtResource("1_a0ook")]
-
-[node name="Player" parent="Court" instance=ExtResource("3_gc2bj")]
-position = Vector2(90, 195)
+script = ExtResource("1_7nysg")
+Ball = ExtResource("2_3wgox")
 
 [node name="Player1Goal" type="Area2D" parent="Court"]
 collision_layer = 8
@@ -34,6 +31,9 @@ metadata/_edit_group_ = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Court/Player2Goal"]
 position = Vector2(50, 181.5)
 shape = SubResource("RectangleShape2D_62tf4")
+
+[node name="Player2" parent="Court" instance=ExtResource("4_c32g0")]
+position = Vector2(127, 170)
 
 [node name="player2_score" type="Label" parent="."]
 anchors_preset = 15
@@ -57,5 +57,5 @@ grow_vertical = 2
 theme_override_fonts/font = ExtResource("2_fmskm")
 horizontal_alignment = 1
 
-[connection signal="body_entered" from="Court/Player1Goal" to="." method="_on_player_1_goal_body_entered"]
-[connection signal="body_entered" from="Court/Player2Goal" to="." method="_on_player_2_goal_body_entered"]
+[connection signal="body_entered" from="Court/Player1Goal" to="Court" method="_on_player_1_goal_body_entered"]
+[connection signal="body_entered" from="Court/Player2Goal" to="Court" method="_on_player_2_goal_body_entered"]
