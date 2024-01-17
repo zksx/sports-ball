@@ -1,15 +1,23 @@
 extends CharacterBody2D
 
-@export var Ball : PackedScene
+@onready var UAngle = $UAngle
+@onready var SAngle = $SAngle
+@onready var DAngle = $DAngle
+@onready var p1 = $p1.global_position
+@onready var p2 = $p2.global_position
 
+@export var Ball : PackedScene
 @export var speed = 200
 @export var has_disc = false
+@export var time = 0
 
 func get_input():
 	var input_direction = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 	velocity = input_direction * speed
 	if Input.is_action_just_pressed("ui_accept") and has_disc:
 		throw()
+	elif Input.is_action_just_pressed("Curve") and has_disc:
+		throw_curve()
 
 func _physics_process(_delta):
 	get_input()
@@ -22,11 +30,32 @@ func _on_disc_area_body_entered(body):
 		print("Fired")
 
 func throw():
+	# create ball object
 	var ball = Ball.instantiate()
-	ball.transform = $Angle.global_transform
+	ball.transform = SAngle.global_transform
 	owner.add_child(ball)
-	var ang = Vector2.ZERO
-	var angle = ang.angle_to_point($Angle.position)
-	print(angle)
-	ball.launch($Angle.position * 5)
+	
+	var vector_angle = get_vector_angle()
+	ball.launch(vector_angle * 5)  
+	
 	has_disc = false
+
+func throw_curve():
+	# create ball object
+	var ball = Ball.instantiate()
+	ball.transform = SAngle.global_transform
+	owner.add_child(ball)
+	
+	ball.curve()
+	has_disc = false
+
+func get_vector_angle():
+	var vector_angle = SAngle.position
+
+	if Input.is_action_pressed("UAngle"):
+		vector_angle = UAngle.position
+
+	elif Input.is_action_pressed("DAngle"):
+		vector_angle = DAngle.position
+
+	return vector_angle

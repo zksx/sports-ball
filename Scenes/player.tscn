@@ -10,28 +10,36 @@ size = Vector2(39, 46)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v3bcr"]
 
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
-position = Vector2(81, 105)
 collision_mask = 3
 script = ExtResource("1_17ndb")
 Ball = ExtResource("2_tq4h8")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(9.5, 13)
 scale = Vector2(0.304688, 0.359375)
 texture = ExtResource("2_us8n8")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(9.5, 13)
 shape = SubResource("RectangleShape2D_i8j2q")
 
 [node name="DiscArea" type="Area2D" parent="."]
-scale = Vector2(3, 3)
+scale = Vector2(2.5, 2.5)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DiscArea"]
-position = Vector2(3, 4.33333)
 shape = SubResource("RectangleShape2D_v3bcr")
 
-[node name="Angle" type="Marker2D" parent="."]
-position = Vector2(60, 12)
+[node name="UAngle" type="Node2D" parent="."]
+position = Vector2(45, -30)
+
+[node name="SAngle" type="Node2D" parent="."]
+position = Vector2(45, 0)
+
+[node name="DAngle" type="Node2D" parent="."]
+position = Vector2(45, 30)
+
+[node name="p1" type="Node2D" parent="."]
+position = Vector2(195, -132)
+
+[node name="p2" type="Node2D" parent="."]
+position = Vector2(682, -7)
 
 [connection signal="body_entered" from="DiscArea" to="." method="_on_disc_area_body_entered"]
