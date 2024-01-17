@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 var time = 0
 var is_curving = false
+var y_weight : int
 
 func _ready():
 	pass
@@ -14,23 +15,24 @@ func _physics_process(delta):
 		move_and_collide(reflect)
 	if is_curving:
 		var vel = self.get_velocity()
-		vel.x += 5
+		vel.x += y_weight
 		if time <= 0.5:
-			vel.y += 7
+			vel.y += y_weight
 		else:
-			vel.y += -7
+			vel.y += -y_weight
 		self.set_velocity(Vector2(vel.x,vel.y))
 	
 		time += delta
 		if time >= 1:
 			time = 0
+			y_weight = 0
 			is_curving = false
 			print("Done")
 
 func serve():
 	self.position = Vector2(340,250)
 	set_velocity(Vector2(-100, -20))
-	
+
 func reset():
 	self.position = Vector2(320,180)
 	set_velocity(Vector2(-100, 20))
@@ -38,5 +40,6 @@ func reset():
 func launch(vector):
 	set_velocity(vector)
 	
-func curve():
+func curve(curve_weight):
+	y_weight = curve_weight
 	is_curving = true

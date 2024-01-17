@@ -1,3 +1,4 @@
+class_name Player
 extends CharacterBody2D
 
 @onready var UAngle = $UAngle
@@ -7,6 +8,7 @@ extends CharacterBody2D
 @onready var p2 = $p2.global_position
 
 @export var Ball : PackedScene
+@export var Stats : PlayerStats
 @export var speed = 200
 @export var has_disc = false
 @export var time = 0
@@ -22,6 +24,7 @@ func get_input():
 func _physics_process(_delta):
 	get_input()
 	move_and_slide()
+	
 
 func _on_disc_area_body_entered(body):
 	if  body.name == "Ball":
@@ -36,7 +39,7 @@ func throw():
 	owner.add_child(ball)
 	
 	var vector_angle = get_vector_angle()
-	ball.launch(vector_angle * 5)  
+	ball.launch(vector_angle * Stats.throw_speed)  
 	
 	has_disc = false
 
@@ -46,7 +49,7 @@ func throw_curve():
 	ball.transform = SAngle.global_transform
 	owner.add_child(ball)
 	
-	ball.curve()
+	ball.curve(Stats.curve_weight)
 	has_disc = false
 
 func get_vector_angle():

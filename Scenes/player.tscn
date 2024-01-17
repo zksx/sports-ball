@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://c2qi7rf5gffjc"]
+[gd_scene load_steps=7 format=3 uid="uid://c2qi7rf5gffjc"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_17ndb"]
 [ext_resource type="PackedScene" uid="uid://bsnjdg0rcr3mh" path="res://Scenes/ball.tscn" id="2_tq4h8"]
 [ext_resource type="Texture2D" uid="uid://bhoko6awbipux" path="res://icon.svg" id="2_us8n8"]
+[ext_resource type="Resource" uid="uid://cffpdpbcdrcyf" path="res://Scenes/player_stats.tres" id="3_3b4eb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i8j2q"]
 size = Vector2(39, 46)
@@ -13,6 +14,7 @@ size = Vector2(39, 46)
 collision_mask = 3
 script = ExtResource("1_17ndb")
 Ball = ExtResource("2_tq4h8")
+Stats = ExtResource("3_3b4eb")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.304688, 0.359375)
