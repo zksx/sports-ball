@@ -26,7 +26,6 @@ func _on_player_2_goal_body_entered(body):
 		p1_score += 1
 		print("goal on p2")
 
-
 func victory():
 	if( p1_score >= 10):
 		print("p1 wins")

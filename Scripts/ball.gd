@@ -3,6 +3,8 @@ extends CharacterBody2D
 var time = 0
 var is_curving = false
 var y_weight : int
+var throw_direction : int
+var face_dir = 1
 
 func _ready():
 	pass
@@ -15,7 +17,7 @@ func _physics_process(delta):
 		move_and_collide(reflect)
 	if is_curving:
 		var vel = self.get_velocity()
-		vel.x += y_weight
+		vel.x = 200 * face_dir
 		if time <= 0.5:
 			vel.y += y_weight
 		else:
@@ -27,7 +29,6 @@ func _physics_process(delta):
 			time = 0
 			y_weight = 0
 			is_curving = false
-			print("Done")
 
 func serve():
 	self.position = Vector2(340,250)
@@ -40,6 +41,7 @@ func reset():
 func launch(vector):
 	set_velocity(vector)
 	
-func curve(curve_weight):
-	y_weight = curve_weight
+func curve(curve_path, facing_dir):
+	y_weight = curve_path
 	is_curving = true
+	face_dir = facing_dir
