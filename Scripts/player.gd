@@ -34,7 +34,6 @@ func _on_disc_area_body_entered(body):
 		self.has_disc = true
 
 func throw():
-		
 	# create ball object
 	var ball = Ball.instantiate()
 	ball.transform = SAngle.global_transform
