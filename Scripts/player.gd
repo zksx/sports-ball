@@ -14,15 +14,31 @@ extends CharacterBody2D
 
 var has_disc = false
 
+func _ready():
+	if Controls.player_index == 2:
+		Stats.throw_speed = Stats.throw_speed * -1
+		Stats.curve_speed = Stats.curve_speed * -1
+
 func get_input():
 	var input_direction = Input.get_vector(Controls.move_left, Controls.move_right, 
 	Controls.move_up,Controls.move_down)
-	
+
 	velocity = input_direction * Stats.move_speed
 	if Input.is_action_just_pressed(Controls.throw) and has_disc:
-		throw()
+		
+		var ball = spawn_ball()
+		var vec_angle = get_vector_angle()
+		
+		ball.launch(vec_angle * Stats.throw_speed)
+		
+		self.has_disc = false
+
 	elif Input.is_action_just_pressed(Controls.curve) and has_disc:
-		throw_curve(Controls.player_index)
+		var ball = spawn_ball()
+		
+		ball.start_curve(Stats.curve_weight, Controls.player_index)
+		
+		self.has_disc = false
 
 func _physics_process(_delta):
 	get_input()
@@ -33,41 +49,13 @@ func _on_disc_area_body_entered(body):
 		body.queue_free()
 		self.has_disc = true
 
-func throw():
-	# create ball object
-	var ball = Ball.instantiate()
-	ball.transform = SAngle.global_transform
-	owner.add_child(ball)
-	
-	var vector_angle = get_vector_angle()
-	ball.launch(vector_angle * Stats.throw_speed  )
-	print(vector_angle * Stats.throw_speed  )  
-	
-	self.has_disc = false
-
-func throw_curve(facing):
-	var facing_dir = 1
-	if facing == 1:
-		facing_dir = -1
-	
-	# create ball object
-	var ball = Ball.instantiate()
-	ball.transform = SAngle.global_transform
-	owner.add_child(ball)
-	
-	var throw_dir = get_throw_direction()
-	var curve_path = Stats.curve_weight * throw_dir
-	
-	ball.curve(curve_path,facing_dir)
-	self.has_disc = false
-
 func get_vector_angle():
 	var vector_angle = SAngle.position
 
-	if Input.is_action_pressed("ui_up"):
+	if Input.is_action_pressed(Controls.move_up):
 		vector_angle = UAngle.position
 
-	elif Input.is_action_pressed("ui_down"):
+	elif Input.is_action_pressed(Controls.move_down):
 		vector_angle = DAngle.position
 
 	return vector_angle
@@ -75,10 +63,17 @@ func get_vector_angle():
 func get_throw_direction():
 	var throw_direction = 1
 
-	if Input.is_action_pressed("ui_up"):
+	if Input.is_action_pressed(Controls.move_up):
 		throw_direction = -1
 
-	elif Input.is_action_pressed("ui_down"):
+	elif Input.is_action_pressed(Controls.move_down):
 		throw_direction = 1
 
 	return throw_direction
+	
+func spawn_ball():
+	var ball = Ball.instantiate()
+	ball.transform = SAngle.global_transform
+	owner.add_child(ball)
+	
+	return ball

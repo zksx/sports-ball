@@ -7,3 +7,4 @@ script = ExtResource("1_ngix3")
 move_speed = 200
 throw_speed = 15
 curve_weight = 9
+curve_speed = 10

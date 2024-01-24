@@ -7,3 +7,4 @@ script = ExtResource("1_ikque")
 move_speed = 150
 throw_speed = 12
 curve_weight = 9
+curve_speed = 20
