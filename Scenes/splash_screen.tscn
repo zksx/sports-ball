@@ -1,0 +1,88 @@
+[gd_scene load_steps=8 format=3 uid="uid://pcjulo7vu3aq"]
+
+[ext_resource type="Texture2D" uid="uid://b18kybvei43js" path="res://Assets/boyyo_splash_screen-assets/dp-bg.png" id="1_11em7"]
+[ext_resource type="Script" path="res://Scenes/splash_screen.gd" id="2_j6be6"]
+[ext_resource type="Texture2D" uid="uid://dhmlt03h4qdon" path="res://Assets/boyyo_splash_screen-assets/boyyo_logo-Sheet.png" id="3_jal1i"]
+[ext_resource type="Texture2D" uid="uid://dagfbf856op3w" path="res://Assets/boyyo_splash_screen-assets/boyyo_head_no_outline.png" id="3_jiybc"]
+
+[sub_resource type="Animation" id="Animation_h32rf"]
+resource_name = "logo"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1, 1.5, 1.6, 1.7, 1.8, 1.9, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+}
+
+[sub_resource type="Animation" id="Animation_t2x8m"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_eyfok"]
+_data = {
+"RESET": SubResource("Animation_t2x8m"),
+"logo": SubResource("Animation_h32rf")
+}
+
+[node name="SplashScreen" type="TextureRect"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+texture = ExtResource("1_11em7")
+script = ExtResource("2_j6be6")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 15.559
+one_shot = true
+autostart = true
+
+[node name="Control" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="BoyyoHead" type="Sprite2D" parent="Control"]
+position = Vector2(322, 194)
+scale = Vector2(3.71875, 3.75)
+texture = ExtResource("3_jiybc")
+
+[node name="BoyyoLogo" type="Sprite2D" parent="Control"]
+position = Vector2(322, 79)
+scale = Vector2(6.57813, 4.85938)
+texture = ExtResource("3_jal1i")
+hframes = 12
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Control/BoyyoLogo"]
+libraries = {
+"": SubResource("AnimationLibrary_eyfok")
+}
+autoplay = "logo"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
