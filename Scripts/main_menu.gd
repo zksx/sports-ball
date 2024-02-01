@@ -2,7 +2,6 @@ extends Control
 
 @onready var start_button = $MarginContainer/HBoxContainer/VBoxContainer/MenuOptions/Start as Button 
 @onready var local_button = $MarginContainer/HBoxContainer/VBoxContainer/MenuOptions/Local
-@onready var multiplayer_button = $MarginContainer/HBoxContainer/VBoxContainer/MenuOptions/Multiplayer
 
 @onready var game_scene = preload("res://Scenes/world.tscn") as PackedScene
 

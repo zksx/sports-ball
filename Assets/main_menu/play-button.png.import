@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://djegc3ellrtlc"
-path="res://.godot/imported/blue-court.png-efac288deedc41eacd9fb717c7790145.ctex"
+uid="uid://si7wx025ukwj"
+path="res://.godot/imported/play-button.png-71454b418e76d2bb38c2152a4ce5896d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/blue-court.png"
-dest_files=["res://.godot/imported/blue-court.png-efac288deedc41eacd9fb717c7790145.ctex"]
+source_file="res://Assets/main_menu/play-button.png"
+dest_files=["res://.godot/imported/play-button.png-71454b418e76d2bb38c2152a4ce5896d.ctex"]
 
 [params]
 
