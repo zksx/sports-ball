@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cbinesnlun262"]
+[gd_scene load_steps=10 format=3 uid="uid://cbinesnlun262"]
 
 [ext_resource type="Script" path="res://Scripts/level.gd" id="1_7nysg"]
 [ext_resource type="PackedScene" uid="uid://dyenm6yugkrnq" path="res://Scenes/court.tscn" id="1_a0ook"]
@@ -7,45 +7,45 @@
 [ext_resource type="PackedScene" uid="uid://c2qi7rf5gffjc" path="res://Scenes/player.tscn" id="4_qv8xv"]
 [ext_resource type="Resource" uid="uid://ywvm12uk7mph" path="res://Scenes/controls/player2_controls.tres" id="5_ie02v"]
 [ext_resource type="Resource" uid="uid://qnemv80au4bs" path="res://Scenes/Stats/player2_stats.tres" id="6_5uyyw"]
+[ext_resource type="PackedScene" uid="uid://c0tj5kxq48hfb" path="res://Scenes/server.tscn" id="8_fgj1l"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_62tf4"]
-size = Vector2(44, 293)
+size = Vector2(18, 154.594)
 
 [node name="World" type="Node"]
 
 [node name="Court" parent="." instance=ExtResource("1_a0ook")]
 script = ExtResource("1_7nysg")
 Ball = ExtResource("2_3wgox")
+metadata/_edit_lock_ = true
 
 [node name="Player1Goal" type="Area2D" parent="Court"]
+position = Vector2(1, -42)
+scale = Vector2(1.429, 1)
 collision_layer = 8
-metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Court/Player1Goal"]
-position = Vector2(50, 181.5)
+position = Vector2(16.0952, 136)
+scale = Vector2(0.983228, 1)
 shape = SubResource("RectangleShape2D_62tf4")
 
 [node name="Player2Goal" type="Area2D" parent="Court"]
-position = Vector2(538, -3)
+position = Vector2(367, -90)
 collision_layer = 8
-metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Court/Player2Goal"]
-position = Vector2(50, 181.5)
+position = Vector2(-73, 182.297)
 shape = SubResource("RectangleShape2D_62tf4")
 
 [node name="Player" parent="Court" instance=ExtResource("4_qv8xv")]
-position = Vector2(111, 189)
+position = Vector2(46, 46)
 metadata/_edit_group_ = true
 
 [node name="Player2" parent="Court" instance=ExtResource("4_qv8xv")]
-position = Vector2(483, 191)
+position = Vector2(245, 51)
 Controls = ExtResource("5_ie02v")
 Stats = ExtResource("6_5uyyw")
 metadata/_edit_group_ = true
-
-[node name="SAngle" parent="Court/Player2" index="4"]
-position = Vector2(-45, 0)
 
 [node name="player2_score" type="Label" parent="."]
 anchors_preset = 15
@@ -69,7 +69,10 @@ grow_vertical = 2
 theme_override_fonts/font = ExtResource("2_fmskm")
 horizontal_alignment = 1
 
+[node name="Server" parent="." instance=ExtResource("8_fgj1l")]
+position = Vector2(153, 167)
+Ball = ExtResource("2_3wgox")
+metadata/_edit_group_ = true
+
 [connection signal="body_entered" from="Court/Player1Goal" to="Court" method="_on_player_1_goal_body_entered"]
 [connection signal="body_entered" from="Court/Player2Goal" to="Court" method="_on_player_2_goal_body_entered"]
-
-[editable path="Court/Player2"]

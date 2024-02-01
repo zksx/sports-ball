@@ -54,7 +54,7 @@ texture = ExtResource("1_11em7")
 script = ExtResource("2_j6be6")
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 15.559
+wait_time = 3.0
 one_shot = true
 autostart = true
 
@@ -69,17 +69,17 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 
 [node name="BoyyoHead" type="Sprite2D" parent="Control"]
-position = Vector2(322, 194)
-scale = Vector2(3.71875, 3.75)
+position = Vector2(160, 110)
+scale = Vector2(2.51562, 2.53125)
 texture = ExtResource("3_jiybc")
 
-[node name="BoyyoLogo" type="Sprite2D" parent="Control"]
-position = Vector2(322, 79)
-scale = Vector2(6.57813, 4.85938)
+[node name="BoyyoLogo" type="Sprite2D" parent="Control/BoyyoHead"]
+position = Vector2(2.08165e-12, -25)
+scale = Vector2(1.76891, 1.29583)
 texture = ExtResource("3_jal1i")
 hframes = 12
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Control/BoyyoLogo"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Control/BoyyoHead/BoyyoLogo"]
 libraries = {
 "": SubResource("AnimationLibrary_eyfok")
 }

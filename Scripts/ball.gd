@@ -20,7 +20,7 @@ func _physics_process(delta):
 		curve(delta)
 
 func serve():
-	self.position = Vector2(340,250)
+	self.position = Vector2(160,90)
 	set_velocity(Vector2(-100, -20))
 
 func reset():

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bbv5dkjy8quek"
-path="res://.godot/imported/label_options.png-19b15ef319e033f5146c10542dd5f109.ctex"
+uid="uid://b33ot4vwbg3jk"
+path="res://.godot/imported/court.png-88da71287c8568ec831d89c6901e36d2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/main_menu/label_options.png"
-dest_files=["res://.godot/imported/label_options.png-19b15ef319e033f5146c10542dd5f109.ctex"]
+source_file="res://Assets/court.png"
+dest_files=["res://.godot/imported/court.png-88da71287c8568ec831d89c6901e36d2.ctex"]
 
 [params]
 
