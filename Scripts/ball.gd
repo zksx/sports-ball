@@ -23,9 +23,9 @@ func serve():
 	self.position = Vector2(160,90)
 	set_velocity(Vector2(-100, -20))
 
-func reset():
+func reset(x_dir):
 	self.position = Vector2(320,180)
-	set_velocity(Vector2(-100, 20))
+	set_velocity(Vector2(x_dir, 0))
 
 func launch(vector):
 	set_velocity(vector)
@@ -38,18 +38,18 @@ func start_curve(weight, curve_speed):
 func curve(delta):
 	var vel = self.get_velocity()
 	
-	vel.x = 300 * face_dir
+	vel.x = curve_spd
 	
 	if time <= 0.5:
 		vel.y += y_weight
 	else:
 		vel.y += -y_weight
+
 	self.set_velocity(Vector2(vel.x,vel.y))
 	
 	time += delta
 
-	if time >= 1:
+	if time >= 0.75:
 		time = 0
 		y_weight = 0
 		is_curving = false
-

@@ -1,28 +1,13 @@
-[gd_scene load_steps=8 format=3 uid="uid://pcjulo7vu3aq"]
+[gd_scene load_steps=9 format=3 uid="uid://pcjulo7vu3aq"]
 
 [ext_resource type="Texture2D" uid="uid://b18kybvei43js" path="res://Assets/boyyo_splash_screen-assets/dp-bg.png" id="1_11em7"]
 [ext_resource type="Script" path="res://Scenes/splash_screen.gd" id="2_j6be6"]
 [ext_resource type="Texture2D" uid="uid://dhmlt03h4qdon" path="res://Assets/boyyo_splash_screen-assets/boyyo_logo-Sheet.png" id="3_jal1i"]
 [ext_resource type="Texture2D" uid="uid://dagfbf856op3w" path="res://Assets/boyyo_splash_screen-assets/boyyo_head_no_outline.png" id="3_jiybc"]
-
-[sub_resource type="Animation" id="Animation_h32rf"]
-resource_name = "logo"
-length = 3.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1, 1.5, 1.6, 1.7, 1.8, 1.9, 2),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
-}
+[ext_resource type="AudioStream" uid="uid://dqmq1jerdhudt" path="res://Assets/boyyo_splash_screen-assets/Retro Owl 01.wav" id="5_u10dn"]
 
 [sub_resource type="Animation" id="Animation_t2x8m"]
-length = 0.001
+length = 10.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -35,6 +20,49 @@ tracks/0/keys = {
 "update": 1,
 "values": [0]
 }
+tracks/1/type = "audio"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimationPlayer/AudioStreamPlayer")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"clips": [],
+"times": PackedFloat32Array()
+}
+tracks/1/use_blend = true
+
+[sub_resource type="Animation" id="Animation_h32rf"]
+resource_name = "logo"
+length = 3.5
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3, 0.45, 0.6, 0.75, 1.25, 1.35, 1.45, 1.55, 1.65, 1.75),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+}
+tracks/1/type = "audio"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimationPlayer/AudioStreamPlayer")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("5_u10dn")
+}],
+"times": PackedFloat32Array(1.3)
+}
+tracks/1/use_blend = true
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_eyfok"]
 _data = {
@@ -54,11 +82,11 @@ texture = ExtResource("1_11em7")
 script = ExtResource("2_j6be6")
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 3.0
+wait_time = 4.0
 one_shot = true
 autostart = true
 
-[node name="Control" type="MarginContainer" parent="."]
+[node name="Control" type="BoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -67,8 +95,10 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+alignment = 1
 
 [node name="BoyyoHead" type="Sprite2D" parent="Control"]
+
 position = Vector2(160, 110)
 scale = Vector2(2.51562, 2.53125)
 texture = ExtResource("3_jiybc")
@@ -76,6 +106,7 @@ texture = ExtResource("3_jiybc")
 [node name="BoyyoLogo" type="Sprite2D" parent="Control/BoyyoHead"]
 position = Vector2(2.08165e-12, -25)
 scale = Vector2(1.76891, 1.29583)
+
 texture = ExtResource("3_jal1i")
 hframes = 12
 
@@ -84,5 +115,8 @@ libraries = {
 "": SubResource("AnimationLibrary_eyfok")
 }
 autoplay = "logo"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Control/BoyyoLogo/AnimationPlayer"]
+autoplay = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
