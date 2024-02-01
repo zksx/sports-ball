@@ -3,6 +3,9 @@ extends Node
 var p1_score = 0
 var p2_score = 0
 
+var serve_left = -100
+var serve_right = 100
+
 @export var Ball : PackedScene
 
 # Called when the node enters the scene tree for the first time.
@@ -17,12 +20,12 @@ func _process(_delta):
 
 func _on_player_1_goal_body_entered(body):
 	if body.name == "Ball":
-		body.reset()
+		body.reset(serve_left)
 		p2_score += 1
 
 func _on_player_2_goal_body_entered(body):
 	if body.name == "Ball":
-		body.reset()
+		body.reset(serve_right)
 		p1_score += 1
 		print("goal on p2")
 

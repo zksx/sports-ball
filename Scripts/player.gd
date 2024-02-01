@@ -35,9 +35,8 @@ func get_input():
 
 	elif Input.is_action_just_pressed(Controls.curve) and has_disc:
 		var ball = spawn_ball()
-		
-		ball.start_curve(Stats.curve_weight, Controls.player_index)
-		
+		var throw_dir = get_throw_direction()
+		ball.start_curve(Stats.curve_weight * throw_dir, Stats.curve_speed * 2)
 		self.has_disc = false
 
 func _physics_process(_delta):
