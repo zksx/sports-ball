@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://c0tj5kxq48hfb" path="res://Scenes/server.tscn" id="8_fgj1l"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_62tf4"]
-size = Vector2(18, 154.594)
+size = Vector2(11.8469, 154.594)
 
 [node name="World" type="Node"]
 
@@ -25,7 +25,7 @@ scale = Vector2(1.429, 1)
 collision_layer = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Court/Player1Goal"]
-position = Vector2(16.0952, 136)
+position = Vector2(5.82411, 133)
 scale = Vector2(0.983228, 1)
 shape = SubResource("RectangleShape2D_62tf4")
 
@@ -34,7 +34,7 @@ position = Vector2(367, -90)
 collision_layer = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Court/Player2Goal"]
-position = Vector2(-73, 182.297)
+position = Vector2(-58, 182)
 shape = SubResource("RectangleShape2D_62tf4")
 
 [node name="Player" parent="Court" instance=ExtResource("4_qv8xv")]
@@ -57,6 +57,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("2_fmskm")
 horizontal_alignment = 1
+metadata/_edit_lock_ = true
 
 [node name="player1_score" type="Label" parent="."]
 anchors_preset = 15
@@ -68,6 +69,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("2_fmskm")
 horizontal_alignment = 1
+metadata/_edit_lock_ = true
 
 [node name="Server" parent="." instance=ExtResource("8_fgj1l")]
 position = Vector2(153, 167)
