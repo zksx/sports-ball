@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+@onready var anim_player = $disc/AnimationPlayer
+
 var time = 0
 var is_curving = false
 var y_weight : int
@@ -8,7 +10,7 @@ var face_dir = 1
 var curve_spd = 0
 
 func _ready():
-	pass
+	play_spin_anim()
 
 func _physics_process(delta):
 	var collison_info = move_and_collide(velocity * delta)
@@ -48,8 +50,12 @@ func curve(delta):
 	self.set_velocity(Vector2(vel.x,vel.y))
 	
 	time += delta
+	
 
 	if time >= 0.75:
 		time = 0
 		y_weight = 0
 		is_curving = false
+		
+func play_spin_anim():
+	anim_player.play("spin")

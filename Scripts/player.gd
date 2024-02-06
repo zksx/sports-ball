@@ -1,5 +1,6 @@
 class_name Player
 extends CharacterBody2D
+@onready var anim_player = $Sprite2D/AnimationPlayer
 
 @onready var UAngle = $UAngle
 @onready var SAngle = $SAngle
@@ -22,6 +23,8 @@ func _ready():
 func get_input():
 	var input_direction = Input.get_vector(Controls.move_left, Controls.move_right, 
 	Controls.move_up,Controls.move_down)
+	
+	play_run_anim(input_direction)
 
 	velocity = input_direction * Stats.move_speed
 	if Input.is_action_just_pressed(Controls.throw) and has_disc:
@@ -76,3 +79,25 @@ func spawn_ball():
 	owner.add_child(ball)
 	
 	return ball
+
+func play_run_anim(input_direction):
+	
+	print(input_direction)
+
+	if input_direction == Vector2.RIGHT:
+		anim_player.play("run_right")
+
+	elif input_direction == Vector2.LEFT:
+		anim_player.play("run_left")
+
+	elif input_direction == Vector2.DOWN:
+		anim_player.play("run_down")
+
+	elif input_direction == Vector2.UP:
+		anim_player.play("run_up")
+		
+	elif input_direction == Vector2(1,1):
+		anim_player.play("run_up")
+
+	else:
+		anim_player.play("idle")

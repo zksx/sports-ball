@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://dyenm6yugkrnq"]
 
-[ext_resource type="Texture2D" uid="uid://b33ot4vwbg3jk" path="res://Assets/court.png" id="1_48bqu"]
+[ext_resource type="Texture2D" uid="uid://nm45xsbu3a07" path="res://Assets/court-outer-wood-pat.png" id="1_2lrtt"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_351wq"]
 a = Vector2(0.000673294, 186)
@@ -14,16 +14,16 @@ b = Vector2(1, 208)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(160.5, 91.5)
-texture = ExtResource("1_48bqu")
+texture = ExtResource("1_2lrtt")
 
 [node name="WallLeft" type="StaticBody2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WallLeft"]
-position = Vector2(17, -258)
+position = Vector2(5, -258)
 shape = SubResource("SegmentShape2D_351wq")
 
 [node name="RightWall" type="StaticBody2D" parent="."]
-position = Vector2(639, 0)
+position = Vector2(650, 2.08165e-12)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RightWall"]
 position = Vector2(-334, -240)
@@ -51,5 +51,5 @@ collision_layer = 2
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Net"]
-position = Vector2(299, -32)
+position = Vector2(305, -32)
 shape = SubResource("SegmentShape2D_d2vky")

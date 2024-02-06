@@ -1,13 +1,122 @@
-[gd_scene load_steps=8 format=3 uid="uid://c2qi7rf5gffjc"]
+[gd_scene load_steps=15 format=3 uid="uid://c2qi7rf5gffjc"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_17ndb"]
 [ext_resource type="PackedScene" uid="uid://bsnjdg0rcr3mh" path="res://Scenes/ball.tscn" id="2_tq4h8"]
-[ext_resource type="Texture2D" uid="uid://bhoko6awbipux" path="res://icon.svg" id="2_us8n8"]
 [ext_resource type="Resource" uid="uid://cffpdpbcdrcyf" path="res://Scenes/Stats/player_stats.tres" id="3_7wphg"]
 [ext_resource type="Resource" uid="uid://d3vchinrtobqs" path="res://Scenes/controls/player1_controls.tres" id="4_2assl"]
+[ext_resource type="Texture2D" uid="uid://fgro8qptkyki" path="res://Assets/bird-spritesheet.png" id="5_i8eqj"]
+
+[sub_resource type="Animation" id="Animation_gbvy8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [20]
+}
+
+[sub_resource type="Animation" id="Animation_wdupf"]
+resource_name = "idle"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
+[sub_resource type="Animation" id="Animation_7qi7b"]
+resource_name = "run_down"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [4, 5, 6, 7, 8, 9, 10, 11]
+}
+
+[sub_resource type="Animation" id="Animation_72smv"]
+resource_name = "run_left"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [12, 13, 14, 15, 16, 17, 18, 19]
+}
+
+[sub_resource type="Animation" id="Animation_x75s8"]
+resource_name = "run_right"
+length = 0.7
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [20, 21, 22, 23, 24, 25, 26]
+}
+
+[sub_resource type="Animation" id="Animation_qp2hf"]
+resource_name = "run_up"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [28, 29, 30, 31, 32, 33, 34, 35]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_r57pd"]
+_data = {
+"RESET": SubResource("Animation_gbvy8"),
+"idle": SubResource("Animation_wdupf"),
+"run_down": SubResource("Animation_7qi7b"),
+"run_left": SubResource("Animation_72smv"),
+"run_right": SubResource("Animation_x75s8"),
+"run_up": SubResource("Animation_qp2hf")
+}
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i8j2q"]
-size = Vector2(18.5, 22)
+size = Vector2(16, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v3bcr"]
 size = Vector2(9.2, 10.4)
@@ -20,10 +129,18 @@ Controls = ExtResource("4_2assl")
 Stats = ExtResource("3_7wphg")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.144532, 0.179688)
-texture = ExtResource("2_us8n8")
+texture = ExtResource("5_i8eqj")
+hframes = 4
+vframes = 9
+frame = 20
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
+libraries = {
+"": SubResource("AnimationLibrary_r57pd")
+}
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 1)
 shape = SubResource("RectangleShape2D_i8j2q")
 
 [node name="DiscArea" type="Area2D" parent="."]
