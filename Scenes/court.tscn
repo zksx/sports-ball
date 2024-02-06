@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://dyenm6yugkrnq"]
 
-[ext_resource type="Texture2D" uid="uid://nm45xsbu3a07" path="res://Assets/court-outer-wood-pat.png" id="1_2lrtt"]
+[ext_resource type="Texture2D" uid="uid://82hbmldkms7n" path="res://Assets/court-outer-wood-pat.png" id="1_2lrtt"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_351wq"]
 a = Vector2(0.000673294, 186)
