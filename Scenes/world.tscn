@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://cbinesnlun262"]
+[gd_scene load_steps=13 format=3 uid="uid://cbinesnlun262"]
 
 [ext_resource type="Script" path="res://Scripts/level.gd" id="1_7nysg"]
 [ext_resource type="PackedScene" uid="uid://dyenm6yugkrnq" path="res://Scenes/court.tscn" id="1_a0ook"]
@@ -14,9 +14,61 @@ size = Vector2(10.6277, 154.594)
 
 [sub_resource type="Animation" id="Animation_bivcd"]
 resource_name = "point_reset"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Court/Player:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(35, 90)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Court/Player2:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(290, 90)]
+}
+
+[sub_resource type="Animation" id="Animation_1ubjf"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Court/Player:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(35, 90)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Court/Player2:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(245, 90)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ephvi"]
 _data = {
+"RESET": SubResource("Animation_1ubjf"),
 "point_reset": SubResource("Animation_bivcd")
 }
 
@@ -47,11 +99,11 @@ scale = Vector2(0.958418, 1.06643)
 shape = SubResource("RectangleShape2D_62tf4")
 
 [node name="Player" parent="Court" instance=ExtResource("4_qv8xv")]
-position = Vector2(46, 46)
+position = Vector2(35, 90)
 metadata/_edit_group_ = true
 
 [node name="Player2" parent="Court" instance=ExtResource("4_qv8xv")]
-position = Vector2(245, 51)
+position = Vector2(245, 90)
 Controls = ExtResource("5_ie02v")
 Stats = ExtResource("6_5uyyw")
 metadata/_edit_group_ = true
@@ -83,14 +135,13 @@ position = Vector2(160, 167)
 scale = Vector2(1.0489, 0.998298)
 metadata/_edit_group_ = true
 
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_ephvi")
 }
+
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 autoplay = true
-
 
 [connection signal="body_entered" from="Court/Player1Goal" to="Court" method="_on_player_1_goal_body_entered"]
 [connection signal="body_entered" from="Court/Player2Goal" to="Court" method="_on_player_2_goal_body_entered"]
