@@ -20,15 +20,15 @@ func _process(_delta):
 	pass
 
 func _on_player_1_goal_body_entered(body):
-	if body.name == "Ball":
+	if body.is_in_group("disc"):
 
 		body.queue_free()
+		p2_score += 1
 		Server.serve()
 
-		p2_score += 1
-
 func _on_player_2_goal_body_entered(body):
-	if body.name == "Ball":
+	
+	if body.is_in_group("disc"):
 
 		body.queue_free()
 

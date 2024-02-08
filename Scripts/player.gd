@@ -47,7 +47,8 @@ func _physics_process(_delta):
 	move_and_slide()
 
 func _on_disc_area_body_entered(body):
-	if  body.name == "Ball":
+	
+	if  body.is_in_group("disc"):
 		body.queue_free()
 		self.has_disc = true
 

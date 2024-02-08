@@ -73,7 +73,6 @@ horizontal_alignment = 1
 [node name="Server" parent="." instance=ExtResource("8_fgj1l")]
 position = Vector2(160, 167)
 scale = Vector2(1.0489, 0.998298)
-Ball = ExtResource("2_3wgox")
 metadata/_edit_group_ = true
 
 [connection signal="body_entered" from="Court/Player1Goal" to="Court" method="_on_player_1_goal_body_entered"]
