@@ -26,6 +26,7 @@ func _on_player_1_goal_body_entered(body):
 
 		body.queue_free()
 		p2_score += 1
+		anim_player.play("point_reset")
 		Server.serve()
 
 func _on_player_2_goal_body_entered(body):

@@ -38,33 +38,22 @@ tracks/1/keys = {
 "update": 0,
 "values": [Vector2(290, 90)]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Court/BottomWall:process_mode")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [4, 0]
+}
 
 [sub_resource type="Animation" id="Animation_1ubjf"]
 length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Court/Player:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(35, 90)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Court/Player2:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(245, 90)]
-}
+step = 0.01
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ephvi"]
 _data = {
@@ -103,7 +92,7 @@ position = Vector2(35, 90)
 metadata/_edit_group_ = true
 
 [node name="Player2" parent="Court" instance=ExtResource("4_qv8xv")]
-position = Vector2(245, 90)
+position = Vector2(290, 90)
 Controls = ExtResource("5_ie02v")
 Stats = ExtResource("6_5uyyw")
 metadata/_edit_group_ = true
@@ -131,7 +120,7 @@ theme_override_fonts/font = ExtResource("2_fmskm")
 horizontal_alignment = 1
 
 [node name="Server" parent="." instance=ExtResource("8_fgj1l")]
-position = Vector2(160, 167)
+position = Vector2(160, 185)
 scale = Vector2(1.0489, 0.998298)
 metadata/_edit_group_ = true
 
@@ -145,3 +134,5 @@ autoplay = true
 
 [connection signal="body_entered" from="Court/Player1Goal" to="Court" method="_on_player_1_goal_body_entered"]
 [connection signal="body_entered" from="Court/Player2Goal" to="Court" method="_on_player_2_goal_body_entered"]
+
+[editable path="Court"]
