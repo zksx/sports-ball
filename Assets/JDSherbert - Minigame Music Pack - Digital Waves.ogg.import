@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dlp53jny02unp"
+path="res://.godot/imported/JDSherbert - Minigame Music Pack - Digital Waves.ogg-9af7d939708990c346d8688dfac3cff1.oggvorbisstr"
+
+[deps]
+
+source_file="res://Assets/JDSherbert - Minigame Music Pack - Digital Waves.ogg"
+dest_files=["res://.godot/imported/JDSherbert - Minigame Music Pack - Digital Waves.ogg-9af7d939708990c346d8688dfac3cff1.oggvorbisstr"]
+
+[params]
+
+loop=true
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

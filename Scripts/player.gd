@@ -1,6 +1,7 @@
 class_name Player
 extends CharacterBody2D
 @onready var anim_player = $Sprite2D/AnimationPlayer
+@onready var audio_player = $throw_sound
 
 @onready var UAngle = $UAngle
 @onready var SAngle = $SAngle
@@ -34,12 +35,17 @@ func get_input():
 		
 		ball.launch(vec_angle * Stats.throw_speed)
 		
+		audio_player.play()
+		
 		self.has_disc = false
 
 	elif Input.is_action_just_pressed(Controls.curve) and has_disc:
 		var ball = spawn_ball()
 		var throw_dir = get_throw_direction()
 		ball.start_curve(Stats.curve_weight * throw_dir, Stats.curve_speed * 2)
+		
+		audio_player.play()
+		
 		self.has_disc = false
 
 func _physics_process(_delta):
@@ -81,8 +87,6 @@ func spawn_ball():
 	return ball
 
 func play_run_anim(input_direction):
-	
-	print(input_direction)
 
 	if input_direction == Vector2.RIGHT:
 		anim_player.play("run_right")
