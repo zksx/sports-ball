@@ -1,10 +1,18 @@
-[gd_scene load_steps=4 format=3 uid="uid://dyenm6yugkrnq"]
+[gd_scene load_steps=8 format=3 uid="uid://dyenm6yugkrnq"]
 
 [ext_resource type="Texture2D" uid="uid://82hbmldkms7n" path="res://Assets/court-outer-wood-pat.png" id="1_2lrtt"]
+[ext_resource type="Script" path="res://Scenes/wall.gd" id="2_yufty"]
+[ext_resource type="AudioStream" uid="uid://cchuy1ftuxwoy" path="res://Assets/Retro Impact Punch Hurt 01.wav" id="3_pa3wh"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_351wq"]
 a = Vector2(0.000673294, 186)
 b = Vector2(0.00172329, 476)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n1oag"]
+size = Vector2(274.375, 9.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_egcr3"]
+size = Vector2(272, 8)
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_d2vky"]
 a = Vector2(0, 49)
@@ -31,19 +39,33 @@ shape = SubResource("SegmentShape2D_351wq")
 
 [node name="TopWall" type="StaticBody2D" parent="."]
 position = Vector2(452, -17)
+script = ExtResource("2_yufty")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TopWall"]
 position = Vector2(38, 32)
 rotation = 1.5708
 shape = SubResource("SegmentShape2D_351wq")
 
+[node name="Area2D" type="Area2D" parent="TopWall"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TopWall/Area2D"]
+position = Vector2(-293.188, 29.75)
+shape = SubResource("RectangleShape2D_n1oag")
+
 [node name="BottomWall" type="StaticBody2D" parent="."]
 position = Vector2(642, 361)
+script = ExtResource("2_yufty")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BottomWall"]
 position = Vector2(-148, -189)
 rotation = 1.5708
 shape = SubResource("SegmentShape2D_351wq")
+
+[node name="Area2D" type="Area2D" parent="BottomWall"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BottomWall/Area2D"]
+position = Vector2(-482, -189)
+shape = SubResource("RectangleShape2D_egcr3")
 
 [node name="Net" type="StaticBody2D" parent="."]
 position = Vector2(-146, -3)
@@ -53,3 +75,9 @@ collision_mask = 0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Net"]
 position = Vector2(305, -32)
 shape = SubResource("SegmentShape2D_d2vky")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_pa3wh")
+
+[connection signal="body_entered" from="TopWall/Area2D" to="TopWall" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="BottomWall/Area2D" to="BottomWall" method="_on_area_2d_body_entered"]

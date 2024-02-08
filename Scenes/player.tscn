@@ -1,10 +1,11 @@
-[gd_scene load_steps=15 format=3 uid="uid://c2qi7rf5gffjc"]
+[gd_scene load_steps=16 format=3 uid="uid://c2qi7rf5gffjc"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_17ndb"]
 [ext_resource type="PackedScene" uid="uid://bsnjdg0rcr3mh" path="res://Scenes/ball.tscn" id="2_tq4h8"]
 [ext_resource type="Resource" uid="uid://cffpdpbcdrcyf" path="res://Scenes/Stats/player_stats.tres" id="3_7wphg"]
 [ext_resource type="Resource" uid="uid://d3vchinrtobqs" path="res://Scenes/controls/player1_controls.tres" id="4_2assl"]
 [ext_resource type="Texture2D" uid="uid://fgro8qptkyki" path="res://Assets/bird-spritesheet.png" id="5_i8eqj"]
+[ext_resource type="AudioStream" uid="uid://jwkossc27wxs" path="res://Assets/Retro Swooosh 07.wav" id="6_0atrl"]
 
 [sub_resource type="Animation" id="Animation_gbvy8"]
 length = 0.001
@@ -160,5 +161,8 @@ position = Vector2(20, 0)
 
 [node name="DAngle" type="Node2D" parent="."]
 position = Vector2(20, 30)
+
+[node name="throw_sound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_0atrl")
 
 [connection signal="body_entered" from="DiscArea" to="." method="_on_disc_area_body_entered"]
