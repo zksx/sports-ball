@@ -8,6 +8,5 @@ func serve():
 	ball.name = "Ball"
 	ball.position = Vector2(0,0)
 
-	ball.set_velocity(Vector2(-100, -30))
+	ball.set_velocity(Vector2(-100, -50))
 	print('Served')
-

@@ -9,6 +9,8 @@ var serve_right = 100
 @export var Ball : PackedScene
 @onready var Server = $"../Server"
 
+@onready var anim_player = $"../AnimationPlayer"
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	ball_spawn()
@@ -24,6 +26,7 @@ func _on_player_1_goal_body_entered(body):
 
 		body.queue_free()
 		p2_score += 1
+		anim_player.play("point_reset")
 		Server.serve()
 
 func _on_player_2_goal_body_entered(body):
@@ -34,6 +37,7 @@ func _on_player_2_goal_body_entered(body):
 
 		p1_score += 1
 		print("goal on p2")
+		anim_player.play("point_reset")
 		Server.serve()
 
 func victory():

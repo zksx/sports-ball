@@ -53,7 +53,6 @@ func _physics_process(_delta):
 	move_and_slide()
 
 func _on_disc_area_body_entered(body):
-	
 	if  body.is_in_group("disc"):
 		body.queue_free()
 		self.has_disc = true
@@ -100,7 +99,7 @@ func play_run_anim(input_direction):
 
 	elif input_direction == Vector2.UP:
 		anim_player.play("run_up")
-		
+
 	elif input_direction == Vector2(1,1):
 		anim_player.play("run_up")
 
