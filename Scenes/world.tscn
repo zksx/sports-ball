@@ -1,7 +1,7 @@
 [gd_scene load_steps=13 format=3 uid="uid://cbinesnlun262"]
 
-[ext_resource type="Script" path="res://Scripts/level.gd" id="1_7nysg"]
 [ext_resource type="PackedScene" uid="uid://dyenm6yugkrnq" path="res://Scenes/court.tscn" id="1_a0ook"]
+[ext_resource type="Script" path="res://Scenes/world.gd" id="1_qk3me"]
 [ext_resource type="PackedScene" uid="uid://bsnjdg0rcr3mh" path="res://Scenes/ball.tscn" id="2_3wgox"]
 [ext_resource type="FontFile" uid="uid://cue5jsjwp7yi0" path="res://Assets/monogram.ttf" id="2_fmskm"]
 [ext_resource type="PackedScene" uid="uid://c2qi7rf5gffjc" path="res://Scenes/player.tscn" id="4_qv8xv"]
@@ -62,10 +62,10 @@ _data = {
 }
 
 [node name="World" type="Node"]
+script = ExtResource("1_qk3me")
+Ball = ExtResource("2_3wgox")
 
 [node name="Court" parent="." instance=ExtResource("1_a0ook")]
-script = ExtResource("1_7nysg")
-Ball = ExtResource("2_3wgox")
 metadata/_edit_lock_ = true
 
 [node name="Player1Goal" type="Area2D" parent="Court"]
@@ -132,7 +132,7 @@ libraries = {
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 autoplay = true
 
-[connection signal="body_entered" from="Court/Player1Goal" to="Court" method="_on_player_1_goal_body_entered"]
-[connection signal="body_entered" from="Court/Player2Goal" to="Court" method="_on_player_2_goal_body_entered"]
+[connection signal="body_entered" from="Court/Player1Goal" to="." method="_on_player_1_goal_body_entered"]
+[connection signal="body_entered" from="Court/Player2Goal" to="." method="_on_player_2_goal_body_entered"]
 
 [editable path="Court"]
