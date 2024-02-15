@@ -27,7 +27,7 @@ func _on_player_1_goal_body_entered(body):
 		body.queue_free()
 		p2_score += 1
 		anim_player.play("point_reset")
-		Server.serve()
+		Server.serve(serve_right)
 
 func _on_player_2_goal_body_entered(body):
 	
@@ -38,7 +38,7 @@ func _on_player_2_goal_body_entered(body):
 		p1_score += 1
 		print("goal on p2")
 		anim_player.play("point_reset")
-		Server.serve()
+		Server.serve(serve_left)
 
 func victory():
 	if( p1_score >= 10):

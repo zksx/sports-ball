@@ -79,5 +79,13 @@ shape = SubResource("SegmentShape2D_d2vky")
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_pa3wh")
 
+[node name="StartLocations" type="Node2D" parent="."]
+
+[node name="P1StartLocation" type="Node2D" parent="StartLocations"]
+position = Vector2(25, 91)
+
+[node name="P2StartLocation" type="Node2D" parent="StartLocations"]
+position = Vector2(300, 91)
+
 [connection signal="body_entered" from="TopWall/Area2D" to="TopWall" method="_on_area_2d_body_entered"]
 [connection signal="body_entered" from="BottomWall/Area2D" to="BottomWall" method="_on_area_2d_body_entered"]
