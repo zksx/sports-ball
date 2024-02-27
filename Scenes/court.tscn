@@ -19,6 +19,7 @@ a = Vector2(0, 49)
 b = Vector2(1, 208)
 
 [node name="Court" type="Node2D"]
+position = Vector2(-0.5, -1.5)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(160.5, 91.5)

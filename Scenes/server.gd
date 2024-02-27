@@ -5,7 +5,7 @@ extends CharacterBody2D
 func serve(dir):
 	var ball = Ball.instantiate()
 	call_deferred("add_child", ball)
-	ball.position = Vector2(0,0)
-
+	ball.position = Vector2(0,-40)
+	
 	ball.set_velocity(Vector2(dir, -50))
 	
