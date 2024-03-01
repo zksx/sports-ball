@@ -50,7 +50,6 @@ func curve(delta):
 	self.set_velocity(Vector2(vel.x,vel.y))
 	
 	time += delta
-	
 
 	if time >= 0.75:
 		time = 0

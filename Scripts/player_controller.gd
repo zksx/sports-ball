@@ -5,5 +5,5 @@ var player: Player
 
 var movement_command := MovementCommand.new()
 
-func _init(player: Player) -> void:
-	self.player = player
+func _init(human_player: Player) -> void:
+	self.player = human_player

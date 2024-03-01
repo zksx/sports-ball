@@ -15,6 +15,7 @@ var serve_dir = serve_left
 
 var reset = false
 var in_play = true
+var players_in_place = 0
 
 @export var Ball : PackedScene
 @onready var Server = $Server
@@ -29,20 +30,81 @@ var in_play = true
 func _ready():
 	ball_spawn()
 
-func _process(delta):
+func _process(_delta):
 	$Court/CanvasLayer/ScoreKeeper/HBoxContainer/player1_score.text = str(p1_score)
 	$Court/CanvasLayer/ScoreKeeper/HBoxContainer/player2_score.text = str(p2_score)
 
 	game_check()
 	set_check()
 
+func _physics_process(delta):
 	if reset:
 		player_reset(delta)
+		
+	if players_in_place == 2:
+		serve_check(serve_dir)
+		for player in players.get_children(): 
+			player.set_controller(HumanController.new(player))
+		players_in_place = 0
+
+
+func ball_spawn():
+	var ball = Ball.instantiate()
+	add_child(ball)
+	ball.serve()
+
+
+func game_check():
+	if( p1_score >= 3):
+		p1_score = 0
+		p2_score = 0
+		p1_set_count += 1
+
+	elif (p2_score >= 3):
+		p1_score = 0
+		p2_score = 0
+		p2_set_count += 1
+
+
+func player_reset(_delta):
+	var starting_loc_pos
+	var index = 0
+	var player_starting_locs = starting_locs.get_children()
+
+	for player in players.get_children():
+		
+		starting_loc_pos = player_starting_locs[index].get_global_position()
+		
+		player.set_controller(AiController.new(player))
+		
+		player.force_move(starting_loc_pos)
+		
+		index += 1
+
+	reset = false
 
 
 func serve_check(ser_dir):
 	Server.serve(ser_dir)
 	in_play = true
+
+
+func set_check():
+	if (p1_set_count >= 2):
+		print("p1_wins")
+		get_tree().change_scene_to_packed(main_menu)
+		
+	elif(p2_set_count >= 2):
+		print("p2_wins")
+		get_tree().change_scene_to_packed(main_menu)
+
+
+func _on_player_player_set():
+	players_in_place += 1
+
+
+func _on_player_2_player_set():
+	players_in_place += 1
 
 
 func _on_player_1_goal_body_entered(body):
@@ -61,54 +123,3 @@ func _on_player_2_goal_body_entered(body):
 		reset = true
 		in_play = false
 		serve_dir = serve_right
-
-
-func game_check():
-	if( p1_score >= 3):
-		p1_score = 0
-		p2_score = 0
-		p1_set_count += 1
-
-	elif (p2_score >= 3):
-		p1_score = 0
-		p2_score = 0
-		p2_set_count += 1
-
-
-func set_check():
-	if (p1_set_count >= 2):
-		print("p1_wins")
-		get_tree().change_scene_to_packed(main_menu)
-		
-	elif(p2_set_count >= 2):
-		print("p2_wins")
-		get_tree().change_scene_to_packed(main_menu)
-
-
-func ball_spawn():
-	var ball = Ball.instantiate()
-	add_child(ball)
-	ball.serve()
-
-
-func player_reset(delta):
-	var index = 0
-	var player_amount = players.get_child_count()
-	var start_loc = starting_loc.get_global_position()
-	
-	
-
-	for player in players.get_children():
-
-		# 1.
-		print("setting AI")
-		player.set_controller(AiController.new(player))
-		
-		# need to gather player starting locations
-		
-		
-		# 2
-		player.force_move(start_loc)
-		
-
-	reset = false

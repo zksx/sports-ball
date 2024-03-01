@@ -164,6 +164,8 @@ autoplay = true
 
 [connection signal="body_entered" from="Court/Player1Goal" to="." method="_on_player_1_goal_body_entered"]
 [connection signal="body_entered" from="Court/Player2Goal" to="." method="_on_player_2_goal_body_entered"]
+[connection signal="player_set" from="Court/Players/Player" to="." method="_on_player_player_set"]
+[connection signal="player_set" from="Court/Players/Player2" to="." method="_on_player_2_player_set"]
 
 [editable path="Court"]
 [editable path="Court/Players/Player2"]

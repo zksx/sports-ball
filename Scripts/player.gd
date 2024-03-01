@@ -13,23 +13,23 @@ extends CharacterBody2D
 @onready var DAngle = $Angles/DAngle
 
 @onready var _controller_container = $ControllerContainer
-
-var _controller = PlayerController
-
 @onready var default_idle = Vector2.RIGHT
 
 @export var Ball : PackedScene
 @export var Controls : PlayerControls
 @export var Stats : PlayerStats
-
 @export var speed = 200
 @export var time = 0
+
+var _controller = PlayerController
 
 var destination_loc
 var should_move = false
 var has_disc = false
 var _horizontal_input: float = 0
 var _vertical_input: float = 0
+
+signal player_set
 
 func _ready():
 	set_controller(HumanController.new(self))
@@ -43,61 +43,27 @@ func _ready():
 			angle.position.x = angle.position.x * -1
 
 
-func set_controller(controller: PlayerController) -> void:
-	# Delete all previous controllers
-	for child in _controller_container.get_children():
-		child.queue_free()
+func _physics_process(delta):
+	if should_move:
+		move_to(delta)
 
-	_controller = controller
-	_controller_container.add_child(_controller)
-
-func move(value: MovementCommand.Params) -> void:
-	_horizontal_input = value.x_input
-	_vertical_input = value.y_input
-	move_and_slide()
+	get_input(delta)
+	handle_movement(delta)
 
 
 func force_move(destination):
 	destination_loc = destination
 	should_move = true
 
-func move_to(delta):
-	if destination_loc != null:
-		var distance = self.global_position.distance_to(destination_loc)
-		var max_speed = (distance / delta)
-		var direction = self.global_position.direction_to(destination_loc)
-		var player_loc = self.get_global_position()
 
-
-		var move_data = MovementCommand.Params.new(direction.x, direction.y)
-
-		self.move(move_data)
-
-		if destination_loc == player_loc:
-			should_move = false
-
-func throw() -> void:
-	pass
-
-func get_input(delta):
-	var input_vector = Vector2.ZERO
-
-	input_vector.x = _horizontal_input
-	input_vector.y = _vertical_input
-	input_vector = input_vector.normalized()
-	
-	play_anims(input_vector)
-	velocity = input_vector * Stats.move_speed
-	
+func get_input(_delta):
 	if Input.is_action_just_pressed(Controls.throw) and has_disc:
 		
 		var ball = spawn_ball()
 		var vec_angle = get_vector_angle()
 		
 		ball.launch(vec_angle * Stats.throw_speed)
-		
 		audio_player.play()
-		
 		self.has_disc = false
 
 
@@ -109,30 +75,6 @@ func get_input(delta):
 		audio_player.play()
 		
 		self.has_disc = false
-
-
-func _physics_process(delta):
-	if should_move:
-		move_to(delta)
-	get_input(delta)
-
-
-func _on_disc_area_body_entered(body):
-	if  body.is_in_group("disc"):
-		body.queue_free()
-		self.has_disc = true
-
-
-func get_vector_angle():
-	var vector_angle = SAngle.position
-
-	if Input.is_action_pressed(Controls.move_up):
-		vector_angle = UAngle.position
-
-	elif Input.is_action_pressed(Controls.move_down):
-		vector_angle = DAngle.position
-
-	return vector_angle
 
 
 func get_throw_direction():
@@ -147,16 +89,51 @@ func get_throw_direction():
 	return throw_direction
 
 
-func spawn_ball():
-	var ball = Ball.instantiate()
-	ball.transform = SAngle.global_transform
-	owner.add_child(ball)
+func get_vector_angle():
+	var vector_angle = SAngle.position
+
+	if Input.is_action_pressed(Controls.move_up):
+		vector_angle = UAngle.position
+
+	elif Input.is_action_pressed(Controls.move_down):
+		vector_angle = DAngle.position
+
+	return vector_angle
+
+func handle_movement(_delta):
+	var input_vector = Vector2.ZERO
+
+	input_vector.x = _horizontal_input
+	input_vector.y = _vertical_input
+	input_vector = input_vector.normalized()
 	
-	return ball
+	play_anims(input_vector)
+	velocity = input_vector * Stats.move_speed
+
+
+func move(value: MovementCommand.Params) -> void:
+	_horizontal_input = value.x_input
+	_vertical_input = value.y_input
+	move_and_slide()
+
+func move_to(delta):
+	if destination_loc != null:
+		
+		var distance = self.global_position.distance_to(destination_loc)
+		var max_speed = (distance / delta)
+		var direction = self.global_position.direction_to(destination_loc)
+		var player_loc = self.get_global_position()
+		var move_data = MovementCommand.Params.new(direction.x, direction.y)
+		
+		self.velocity = direction * minf(speed, max_speed)
+		self.move(move_data)
+
+		if destination_loc == player_loc:
+			should_move = false
+			player_set.emit()
 
 
 func play_anims(input_vector):
-
 	if input_vector != Vector2.ZERO:
 		anim_tree["parameters/conditions/is_moving"] = true
 		anim_tree["parameters/conditions/is_idle"] = false
@@ -168,5 +145,25 @@ func play_anims(input_vector):
 	anim_tree["parameters/Run/blend_position"] = input_vector
 	anim_tree["parameters/Idle/blend_position"] = default_idle
 
-func p1_reset():
-		anim_player.play("reset_p1")
+
+func set_controller(controller: PlayerController) -> void:
+	# Delete all previous controllers
+	for child in _controller_container.get_children():
+		child.queue_free()
+
+	_controller = controller
+	_controller_container.add_child(_controller)
+
+
+func spawn_ball():
+	var ball = Ball.instantiate()
+	ball.transform = SAngle.global_transform
+	owner.add_child(ball)
+	
+	return ball
+
+
+func _on_disc_area_body_entered(body):
+	if  body.is_in_group("disc"):
+		body.queue_free()
+		self.has_disc = true

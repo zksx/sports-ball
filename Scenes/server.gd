@@ -8,4 +8,3 @@ func serve(dir):
 	ball.position = Vector2(0,-40)
 	
 	ball.set_velocity(Vector2(dir, -50))
-	
