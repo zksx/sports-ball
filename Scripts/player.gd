@@ -32,7 +32,9 @@ var _vertical_input: float = 0
 signal player_set
 
 func _ready():
-	set_controller(HumanController.new(self))
+	var human_controller = HumanController.new(self)
+	human_controller.set_controls(self.Controls)
+	set_controller(human_controller)
 	
 	if Controls.player_index == 2:
 		Stats.curve_speed = Stats.curve_speed * -1
@@ -61,9 +63,7 @@ func get_input(_delta):
 		
 		var ball = spawn_ball()
 		var vec_angle = get_vector_angle()
-		
 		ball.launch(vec_angle * Stats.throw_speed)
-		audio_player.play()
 		self.has_disc = false
 
 
@@ -71,9 +71,6 @@ func get_input(_delta):
 		var ball = spawn_ball()
 		var throw_dir = get_throw_direction()
 		ball.start_curve(Stats.curve_weight * throw_dir, Stats.curve_speed * 2)
-		
-		audio_player.play()
-		
 		self.has_disc = false
 
 
@@ -99,6 +96,7 @@ func get_vector_angle():
 		vector_angle = DAngle.position
 
 	return vector_angle
+
 
 func handle_movement(_delta):
 	var input_vector = Vector2.ZERO

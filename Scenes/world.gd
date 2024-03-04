@@ -44,7 +44,10 @@ func _physics_process(delta):
 	if players_in_place == 2:
 		serve_check(serve_dir)
 		for player in players.get_children(): 
-			player.set_controller(HumanController.new(player))
+			var human_controller = HumanController.new(player)
+			human_controller.set_controls(player.Controls)
+			player.set_controller(human_controller)
+			
 		players_in_place = 0
 
 
@@ -93,7 +96,7 @@ func set_check():
 	if (p1_set_count >= 2):
 		print("p1_wins")
 		get_tree().change_scene_to_packed(main_menu)
-		
+	
 	elif(p2_set_count >= 2):
 		print("p2_wins")
 		get_tree().change_scene_to_packed(main_menu)

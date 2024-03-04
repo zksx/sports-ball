@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
 @onready var anim_player = $disc/AnimationPlayer
+@onready var audio_player = $throw_sound
 
 var time = 0
 var is_curving = false
@@ -31,11 +32,15 @@ func reset(x_dir):
 
 func launch(vector):
 	set_velocity(vector)
+	play_spin_anim()
+	audio_player.play()
 
 func start_curve(weight, curve_speed):
 	y_weight = weight
 	is_curving = true
 	curve_spd = curve_speed
+	play_spin_anim()
+	audio_player.play()
 	
 func curve(delta):
 	var vel = self.get_velocity()
