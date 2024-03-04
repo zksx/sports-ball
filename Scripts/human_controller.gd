@@ -5,7 +5,6 @@ var Controls : PlayerControls
 
 func set_controls(player_controls):
 	Controls = player_controls
-	print(Controls.move_right)
 
 func _physics_process(_delta) -> void:
 	var movement_x_input = Input.get_action_strength(Controls.move_right) - Input.get_action_strength(Controls.move_left) 
