@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://82hbmldkms7n"
-path="res://.godot/imported/court-outer-wood-pat.png-2345166119786027148df7689cb7673a.ctex"
+uid="uid://cwy5heyt87s8j"
+path="res://.godot/imported/bumper4.png-160c720d46d9185bac004e5dc0fed286.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/court-outer-wood-pat.png"
-dest_files=["res://.godot/imported/court-outer-wood-pat.png-2345166119786027148df7689cb7673a.ctex"]
+source_file="res://Assets/bumper4.png"
+dest_files=["res://.godot/imported/bumper4.png-160c720d46d9185bac004e5dc0fed286.ctex"]
 
 [params]
 

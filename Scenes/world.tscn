@@ -83,7 +83,7 @@ script = ExtResource("1_qk3me")
 Ball = ExtResource("2_3wgox")
 
 [node name="Court" parent="." instance=ExtResource("1_a0ook")]
-metadata/_edit_lock_ = true
+position = Vector2(0, -1)
 
 [node name="Player1Goal" type="Area2D" parent="Court"]
 position = Vector2(1, -42)
@@ -150,7 +150,7 @@ theme_override_fonts/font = ExtResource("2_fmskm")
 horizontal_alignment = 1
 
 [node name="Server" parent="." instance=ExtResource("8_fgj1l")]
-position = Vector2(160, 185)
+position = Vector2(160, 167)
 scale = Vector2(1.0489, 0.998298)
 metadata/_edit_group_ = true
 
@@ -167,5 +167,4 @@ autoplay = true
 [connection signal="player_set" from="Court/Players/Player" to="." method="_on_player_player_set"]
 [connection signal="player_set" from="Court/Players/Player2" to="." method="_on_player_2_player_set"]
 
-[editable path="Court"]
 [editable path="Court/Players/Player2"]
