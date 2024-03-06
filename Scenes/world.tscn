@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://cbinesnlun262"]
+[gd_scene load_steps=12 format=3 uid="uid://cbinesnlun262"]
 
 [ext_resource type="PackedScene" uid="uid://dyenm6yugkrnq" path="res://Scenes/court.tscn" id="1_a0ook"]
 [ext_resource type="Script" path="res://Scenes/world.gd" id="1_qk3me"]
@@ -8,9 +8,6 @@
 [ext_resource type="Resource" uid="uid://ywvm12uk7mph" path="res://Scenes/controls/player2_controls.tres" id="5_ie02v"]
 [ext_resource type="Resource" uid="uid://qnemv80au4bs" path="res://Scenes/Stats/player2_stats.tres" id="6_5uyyw"]
 [ext_resource type="PackedScene" uid="uid://c0tj5kxq48hfb" path="res://Scenes/server.tscn" id="8_fgj1l"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_62tf4"]
-size = Vector2(10.6277, 154.594)
 
 [sub_resource type="Animation" id="Animation_1ubjf"]
 length = 0.001
@@ -78,31 +75,12 @@ _data = {
 "point_reset": SubResource("Animation_bivcd")
 }
 
-[node name="World" type="Node"]
+[node name="World" type="Node2D"]
 script = ExtResource("1_qk3me")
 Ball = ExtResource("2_3wgox")
 
 [node name="Court" parent="." instance=ExtResource("1_a0ook")]
 position = Vector2(0, -1)
-
-[node name="Player1Goal" type="Area2D" parent="Court"]
-position = Vector2(1, -42)
-scale = Vector2(1.429, 1)
-collision_layer = 8
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Court/Player1Goal"]
-position = Vector2(6.62432, 136)
-scale = Vector2(0.983228, 1)
-shape = SubResource("RectangleShape2D_62tf4")
-
-[node name="Player2Goal" type="Area2D" parent="Court"]
-position = Vector2(367, -90)
-collision_layer = 8
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Court/Player2Goal"]
-position = Vector2(-55, 182.297)
-scale = Vector2(0.958418, 1.06643)
-shape = SubResource("RectangleShape2D_62tf4")
 
 [node name="Players" type="Node2D" parent="Court"]
 
@@ -151,7 +129,6 @@ horizontal_alignment = 1
 
 [node name="Server" parent="." instance=ExtResource("8_fgj1l")]
 position = Vector2(160, 167)
-scale = Vector2(1.0489, 0.998298)
 metadata/_edit_group_ = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -162,9 +139,5 @@ libraries = {
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 autoplay = true
 
-[connection signal="body_entered" from="Court/Player1Goal" to="." method="_on_player_1_goal_body_entered"]
-[connection signal="body_entered" from="Court/Player2Goal" to="." method="_on_player_2_goal_body_entered"]
 [connection signal="player_set" from="Court/Players/Player" to="." method="_on_player_player_set"]
 [connection signal="player_set" from="Court/Players/Player2" to="." method="_on_player_2_player_set"]
-
-[editable path="Court/Players/Player2"]
