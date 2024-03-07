@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://pcjulo7vu3aq"]
 
 [ext_resource type="Texture2D" uid="uid://b18kybvei43js" path="res://Assets/boyyo_splash_screen-assets/dp-bg.png" id="1_11em7"]
-[ext_resource type="Script" path="res://Scenes/splash_screen.gd" id="2_j6be6"]
+[ext_resource type="Script" path="res://Scripts/splash_screen.gd" id="2_j6be6"]
 [ext_resource type="Texture2D" uid="uid://dhmlt03h4qdon" path="res://Assets/boyyo_splash_screen-assets/boyyo_logo-Sheet.png" id="3_jal1i"]
 [ext_resource type="Texture2D" uid="uid://dagfbf856op3w" path="res://Assets/boyyo_splash_screen-assets/boyyo_head_no_outline.png" id="3_jiybc"]
 [ext_resource type="AudioStream" uid="uid://dqmq1jerdhudt" path="res://Assets/boyyo_splash_screen-assets/Retro Owl 01.wav" id="5_u10dn"]

@@ -112,6 +112,8 @@ func _on_player_2_player_set():
 
 func _on_player_1_goal_body_entered(body):
 	if body.is_in_group("disc"):
+		var goal1_anim = $Court/LeftGoal/AnimationPlayer
+		goal1_anim.play("score")
 		body.queue_free()
 		p2_score += 1
 		reset = true
@@ -121,7 +123,12 @@ func _on_player_1_goal_body_entered(body):
 
 func _on_player_2_goal_body_entered(body):
 	if body.is_in_group("disc"):
-		body.queue_free()
+		var goal2_anim = $Court/RightGoal/AnimationPlayer
+		body.velocity = Vector2.ZERO
+		goal2_anim.play("score")
+		await goal2_anim.animation_finished
+
+		print("timer done")
 		p1_score += 1
 		reset = true
 		in_play = false

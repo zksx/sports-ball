@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://bsnjdg0rcr3mh"]
 
 [ext_resource type="Script" path="res://Scripts/ball.gd" id="1_u3wky"]
-[ext_resource type="Texture2D" uid="uid://tbuliu02jn2e" path="res://Assets/disc-sheet.png" id="2_biiee"]
+[ext_resource type="Texture2D" uid="uid://bfvfwvimmg25a" path="res://Assets/disc-sheet.png" id="2_biiee"]
 [ext_resource type="Texture2D" uid="uid://ciwepbo8ckepp" path="res://Assets/disc-shadow.png" id="3_hqjkw"]
 [ext_resource type="AudioStream" uid="uid://jwkossc27wxs" path="res://Assets/Retro Swooosh 07.wav" id="4_dqxc0"]
 

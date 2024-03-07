@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bfvfwvimmg25a"
-path="res://.godot/imported/disc-Sheet.png-96adcee92115d5034e07f699215d3b1d.ctex"
+uid="uid://l30pwggpt4ap"
+path="res://.godot/imported/goal1.png-b05a4d17521ad7166ca882d1b3843134.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Scripts/disc-Sheet.png"
-dest_files=["res://.godot/imported/disc-Sheet.png-96adcee92115d5034e07f699215d3b1d.ctex"]
+source_file="res://Assets/goal1.png"
+dest_files=["res://.godot/imported/goal1.png-b05a4d17521ad7166ca882d1b3843134.ctex"]
 
 [params]
 
