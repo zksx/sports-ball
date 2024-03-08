@@ -13,8 +13,8 @@ var serve_left = -100
 var serve_right = 100
 var serve_dir = serve_left
 
-var reset = false
-var in_play = true
+var players_should_reset = false
+var disc_in_play = true
 var players_in_place = 0
 
 @export var Ball : PackedScene
@@ -38,7 +38,7 @@ func _process(_delta):
 	set_check()
 
 func _physics_process(delta):
-	if reset:
+	if players_should_reset:
 		player_reset(delta)
 		
 	if players_in_place == 2:
@@ -84,12 +84,12 @@ func player_reset(_delta):
 		
 		index += 1
 
-	reset = false
+	players_should_reset = false
 
 
 func serve_check(ser_dir):
 	Server.serve(ser_dir)
-	in_play = true
+	disc_in_play = true
 
 
 func set_check():
@@ -112,39 +112,33 @@ func _on_player_2_player_set():
 
 func _on_player_1_goal_body_entered(body):
 	if body.is_in_group("disc"):
-		var goal1_anim = $Court/LeftGoal/AnimationPlayer
-		var audio = $Court/LeftGoal/AudioStreamPlayer2D
+		var disc = body
+		var goal = $Court/LeftGoal
 		
-		body.is_alive = false
-		body.is_moving = false
-		body.velocity = Vector2.ZERO
-		
-		goal1_anim.play("score")
-		audio.play()
-		await goal1_anim.animation_finished
-		body.queue_free()
+		await play_goal_sequence(disc, goal)
 		
 		p2_score += 1
-		reset = true
-		in_play = false
-		serve_dir = serve_left
+		
+		set_flags_for_goal()
 
 
 func _on_player_2_goal_body_entered(body):
 	if body.is_in_group("disc"):
-		var goal2_anim = $Court/RightGoal/AnimationPlayer
-		var audio = $Court/RightGoal/AudioStreamPlayer2D
+		var disc = body
+		var goal = $Court/RightGoal
 		
-		body.is_alive = false
-		body.is_moving = false
-		body.velocity = Vector2.ZERO
-		
-		goal2_anim.play("score")
-		audio.play()
-		await goal2_anim.animation_finished
-		body.queue_free()
+		await play_goal_sequence(disc, goal)
 		
 		p1_score += 1
-		reset = true
-		in_play = false
-		serve_dir = serve_right
+		
+		set_flags_for_goal()
+
+func play_goal_sequence(disc, goal):
+	disc.dead_ball()
+	await goal.play_goal()
+	disc.queue_free()
+
+func set_flags_for_goal():
+	players_should_reset = true
+	disc_in_play = false
+	serve_dir = serve_right

@@ -69,3 +69,8 @@ func curve(delta):
 		
 func play_spin_anim():
 	anim_player.play("spin")
+
+func dead_ball():
+	is_alive = false
+	is_moving = false
+	velocity = Vector2.ZERO
