@@ -9,6 +9,8 @@ var y_weight : int
 var throw_direction : int
 var face_dir = 1
 var curve_spd = 0
+var is_moving = false
+var is_alive = true
 
 func _ready():
 	play_spin_anim()
@@ -38,9 +40,11 @@ func launch(vector):
 func start_curve(weight, curve_speed):
 	y_weight = weight
 	is_curving = true
+	is_moving = true
 	curve_spd = curve_speed
 	play_spin_anim()
 	audio_player.play()
+	
 	
 func curve(delta):
 	var vel = self.get_velocity()
@@ -56,10 +60,12 @@ func curve(delta):
 	
 	time += delta
 
-	if time >= 0.75:
+	if time >= 0.75 or !is_moving:
 		time = 0
 		y_weight = 0
 		is_curving = false
+		is_moving = false
+		
 		
 func play_spin_anim():
 	anim_player.play("spin")

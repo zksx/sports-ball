@@ -162,6 +162,6 @@ func spawn_ball():
 
 
 func _on_disc_area_body_entered(body):
-	if  body.is_in_group("disc"):
+	if  body.is_in_group("disc") and body.is_alive:
 		body.queue_free()
 		self.has_disc = true

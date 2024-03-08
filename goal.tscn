@@ -1,9 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://2j7cbyw1wrhd"]
+[gd_scene load_steps=9 format=3 uid="uid://2j7cbyw1wrhd"]
 
+[ext_resource type="Script" path="res://goal.gd" id="1_a8ysc"]
+[ext_resource type="AudioStream" uid="uid://bo8ohac36yofb" path="res://Assets/goal-sfx.mp3" id="2_fav1c"]
 [ext_resource type="Texture2D" uid="uid://dw44rd7loegk" path="res://Assets/goal-Sheet.png" id="2_k4e5q"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ffctg"]
-size = Vector2(10, 115)
+size = Vector2(15, 115)
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_mrujq"]
 a = Vector2(2.08165e-12, -50)
@@ -47,13 +49,14 @@ _data = {
 
 [node name="Goal" type="StaticBody2D"]
 position = Vector2(2.08165e-12, 2.08165e-12)
+script = ExtResource("1_a8ysc")
 
 [node name="PlayerGoal" type="Area2D" parent="."]
 position = Vector2(2.08165e-12, -65)
 collision_layer = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerGoal"]
-position = Vector2(10, 2)
+position = Vector2(15, 8)
 scale = Vector2(0.983228, 1)
 shape = SubResource("RectangleShape2D_ffctg")
 
@@ -72,3 +75,6 @@ texture = ExtResource("2_k4e5q")
 flip_h = true
 hframes = 3
 frame = 1
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_fav1c")
