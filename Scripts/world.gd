@@ -3,9 +3,6 @@ extends Node
 var gameManager = preload("res://Scripts/GameManager.tres")
 var main_menu = preload("res://Scenes/main_menu.tscn")
 
-var p1_score = 0
-var p2_score = 0
-
 var p1_set_count = 0
 var p2_set_count = 0
 
@@ -15,7 +12,9 @@ var serve_dir = serve_left
 
 var players_should_reset = false
 var disc_in_play = true
+var one_time = false
 var players_in_place = 0
+
 
 @export var Ball : PackedScene
 @onready var Server = $Server
@@ -26,14 +25,19 @@ var players_in_place = 0
 @onready var anim_player = $AnimationPlayer
 
 @onready var starting_loc = $Court/StartLocations/P1StartLocation
+@onready var ScoreBoard = $ScoreBoard
+
+@onready var Camera = $Path2D/PathFollow2D/Camera2D
+@onready var PathFollow = $Path2D/PathFollow2D
+
+var camera_move = false
+var player_count = 0
 
 func _ready():
+	player_count = players.get_children().size()
 	ball_spawn()
 
 func _process(_delta):
-	$Court/CanvasLayer/ScoreKeeper/HBoxContainer/player1_score.text = str(p1_score)
-	$Court/CanvasLayer/ScoreKeeper/HBoxContainer/player2_score.text = str(p2_score)
-
 	game_check()
 	set_check()
 
@@ -41,7 +45,7 @@ func _physics_process(delta):
 	if players_should_reset:
 		player_reset(delta)
 		
-	if players_in_place == 2:
+	if players_in_place == player_count:
 		serve_check(serve_dir)
 		for player in players.get_children(): 
 			var human_controller = HumanController.new(player)
@@ -49,6 +53,31 @@ func _physics_process(delta):
 			player.set_controller(human_controller)
 			
 		players_in_place = 0
+		
+	# check if the camera should move
+	if camera_move:
+	
+		if !one_time:
+			# increment path follower ratio 
+			PathFollow.progress_ratio += 0.08
+			
+		else:
+			PathFollow.progress_ratio -= 0.02
+			print("going back")
+		
+			
+		if PathFollow.progress_ratio >= 0.5 and !one_time:
+
+			print("ONE TIME")
+			await get_tree().create_timer(1).timeout
+			one_time = true
+			print("PASS TIMER")
+			
+		if PathFollow.progress_ratio <= 0.0:
+			camera_move = false
+			one_time = false
+
+				# possible decrement the ratio back to 0
 
 
 func ball_spawn():
@@ -58,15 +87,17 @@ func ball_spawn():
 
 
 func game_check():
-	if( p1_score >= 3):
-		p1_score = 0
-		p2_score = 0
-		p1_set_count += 1
+	if( ScoreBoard.get_player_1_score() >= 3):
 
-	elif (p2_score >= 3):
-		p1_score = 0
-		p2_score = 0
+		p1_set_count += 1
+		ScoreBoard.player_1_set_win()
+		ScoreBoard.reset_scores()
+
+	elif (ScoreBoard.get_player_2_score() >= 3):
+
 		p2_set_count += 1
+		ScoreBoard.player_2_set_win()
+		ScoreBoard.reset_scores()
 
 
 func player_reset(_delta):
@@ -117,7 +148,7 @@ func _on_player_1_goal_body_entered(body):
 		
 		await play_goal_sequence(disc, goal)
 		
-		p2_score += 1
+		ScoreBoard.player_2_scored()
 		
 		set_flags_for_goal()
 
@@ -127,18 +158,26 @@ func _on_player_2_goal_body_entered(body):
 		var disc = body
 		var goal = $Court/RightGoal
 		
+		move_camera_for_goal()
+		
 		await play_goal_sequence(disc, goal)
 		
-		p1_score += 1
+		ScoreBoard.player_1_scored()
 		
 		set_flags_for_goal()
 
+
 func play_goal_sequence(disc, goal):
 	disc.dead_ball()
+	Camera.shake()
 	await goal.play_goal()
 	disc.queue_free()
+
 
 func set_flags_for_goal():
 	players_should_reset = true
 	disc_in_play = false
 	serve_dir = serve_right
+
+func move_camera_for_goal():
+	camera_move = true
