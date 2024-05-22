@@ -6,7 +6,7 @@
 [ext_resource type="Resource" uid="uid://ywvm12uk7mph" path="res://Scenes/controls/player2_controls.tres" id="5_ie02v"]
 [ext_resource type="Resource" uid="uid://qnemv80au4bs" path="res://Scenes/Stats/player2_stats.tres" id="6_5uyyw"]
 [ext_resource type="PackedScene" uid="uid://c0tj5kxq48hfb" path="res://Scenes/server.tscn" id="8_fgj1l"]
-[ext_resource type="Script" path="res://Scenes/Camera2D.gd" id="9_43jt3"]
+[ext_resource type="Script" path="res://Scripts/Camera2D.gd" id="9_43jt3"]
 [ext_resource type="PackedScene" uid="uid://dg4rqw2eninrm" path="res://Scenes/score_board.tscn" id="9_pfa2v"]
 
 [sub_resource type="Animation" id="Animation_1ubjf"]
