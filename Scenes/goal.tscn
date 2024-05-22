@@ -1,8 +1,8 @@
 [gd_scene load_steps=9 format=3 uid="uid://2j7cbyw1wrhd"]
 
-[ext_resource type="Script" path="res://goal.gd" id="1_a8ysc"]
-[ext_resource type="AudioStream" uid="uid://bo8ohac36yofb" path="res://Assets/goal-sfx.mp3" id="2_fav1c"]
+[ext_resource type="Script" path="res://Scripts/goal.gd" id="1_a8ysc"]
 [ext_resource type="Texture2D" uid="uid://dw44rd7loegk" path="res://Assets/goal-Sheet.png" id="2_k4e5q"]
+[ext_resource type="AudioStream" uid="uid://bdyyl86ya2oi4" path="res://Assets/goal-sfx.mp3" id="3_5liv0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ffctg"]
 size = Vector2(15, 115)
@@ -35,7 +35,7 @@ tracks/0/path = NodePath("goal-sheet:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.3, 0.4, 0.5, 0.6),
+"times": PackedFloat32Array(0, 0.5, 0.6, 0.7, 0.8, 0.9),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 1, 2, 1]
@@ -77,4 +77,4 @@ hframes = 3
 frame = 1
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("2_fav1c")
+stream = ExtResource("3_5liv0")

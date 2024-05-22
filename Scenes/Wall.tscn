@@ -1,0 +1,77 @@
+[gd_scene load_steps=8 format=3 uid="uid://d57h7j0h1oa4"]
+
+[ext_resource type="Script" path="res://Scripts/wall.gd" id="1_cuh1a"]
+[ext_resource type="Texture2D" uid="uid://d15belsw027ln" path="res://Assets/bumper-Sheet.png" id="2_x1ju0"]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_351wq"]
+a = Vector2(2.08165e-12, -150)
+b = Vector2(2.08165e-12, 150)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n1oag"]
+size = Vector2(274.375, 9.5)
+
+[sub_resource type="Animation" id="Animation_bhvby"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+
+[sub_resource type="Animation" id="Animation_omj56"]
+resource_name = "hit"
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.01, 0.02, 0.03, 0.04, 0.07, 0.09, 0.11, 0.14, 0.16, 0.21, 0.25, 0.3, 0.36, 0.42, 0.52),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [2, 3, 0, 1, 2, 3, 0, 1, 2, 3, 0, 1, 2, 3, 3, 0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dtf7f"]
+_data = {
+"RESET": SubResource("Animation_bhvby"),
+"hit": SubResource("Animation_omj56")
+}
+
+[node name="Wall" type="StaticBody2D"]
+position = Vector2(2.08165e-12, 2.08165e-12)
+script = ExtResource("1_cuh1a")
+
+[node name="Boundry" type="CollisionShape2D" parent="."]
+position = Vector2(2.08165e-12, 2.08165e-12)
+rotation = 1.5708
+shape = SubResource("SegmentShape2D_351wq")
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(0.659851, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(2.08165e-12, 2.08165e-12)
+shape = SubResource("RectangleShape2D_n1oag")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(2.08165e-12, 2.08165e-12)
+texture = ExtResource("2_x1ju0")
+hframes = 4
+frame = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_dtf7f")
+}
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

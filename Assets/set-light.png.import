@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d32jb8dbdkn1q"
-path="res://.godot/imported/court.png-88da71287c8568ec831d89c6901e36d2.ctex"
+uid="uid://d16evpups524m"
+path="res://.godot/imported/set-light.png-7de3e3b02a4eee92525f3e74f3481c3d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/court.png"
-dest_files=["res://.godot/imported/court.png-88da71287c8568ec831d89c6901e36d2.ctex"]
+source_file="res://Assets/set-light.png"
+dest_files=["res://.godot/imported/set-light.png-7de3e3b02a4eee92525f3e74f3481c3d.ctex"]
 
 [params]
 

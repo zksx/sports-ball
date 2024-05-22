@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d32jb8dbdkn1q"
-path="res://.godot/imported/court.png-88da71287c8568ec831d89c6901e36d2.ctex"
+uid="uid://m26jresqnp5"
+path="res://.godot/imported/simone-port-frame.png-b0c507a311589bba97d0eeefbf166d9f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/court.png"
-dest_files=["res://.godot/imported/court.png-88da71287c8568ec831d89c6901e36d2.ctex"]
+source_file="res://Assets/simone-port-frame.png"
+dest_files=["res://.godot/imported/simone-port-frame.png-b0c507a311589bba97d0eeefbf166d9f.ctex"]
 
 [params]
 

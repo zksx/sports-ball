@@ -1,0 +1,104 @@
+[gd_scene load_steps=5 format=3 uid="uid://dg4rqw2eninrm"]
+
+[ext_resource type="Script" path="res://Scripts/score_board.gd" id="1_f6fnj"]
+[ext_resource type="Texture2D" uid="uid://c2rxa7guugp6q" path="res://Assets/score-board.png" id="2_6nf6l"]
+[ext_resource type="FontFile" uid="uid://du8k00r3ug0r7" path="res://Assets/Scoreboard.ttf" id="3_h7hbs"]
+[ext_resource type="Texture2D" uid="uid://d16evpups524m" path="res://Assets/set-light.png" id="4_i0jlg"]
+
+[node name="ScoreBoard" type="Node2D"]
+position = Vector2(29, 6)
+script = ExtResource("1_f6fnj")
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_6nf6l")
+metadata/_edit_lock_ = true
+
+[node name="ScoreKeeper" type="Control" parent="Sprite2D"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -53.0
+offset_top = -16.0
+offset_right = -53.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+metadata/_edit_lock_ = true
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Sprite2D/ScoreKeeper"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 42.0
+offset_top = 20.0
+offset_right = 42.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.22947, 0.235887)
+
+[node name="time" type="Label" parent="Sprite2D/ScoreKeeper/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0.635294, 0.364706, 0, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_fonts/font = ExtResource("3_h7hbs")
+text = "0"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Sprite2D/ScoreKeeper"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.047
+anchor_top = 0.344
+anchor_right = 1.094
+anchor_bottom = 0.937
+offset_left = 0.0179998
+offset_top = -0.00800037
+offset_right = 0.0359893
+offset_bottom = 0.0159988
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="player1_score" type="Label" parent="Sprite2D/ScoreKeeper/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0.635294, 0.364706, 0, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_fonts/font = ExtResource("3_h7hbs")
+theme_override_font_sizes/font_size = 8
+text = "0"
+horizontal_alignment = 1
+
+[node name="player2_score" type="Label" parent="Sprite2D/ScoreKeeper/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0.592157, 0.364706, 0, 1)
+theme_override_fonts/font = ExtResource("3_h7hbs")
+theme_override_font_sizes/font_size = 8
+text = "0"
+horizontal_alignment = 1
+
+[node name="player1_set_light" type="Sprite2D" parent="Sprite2D/ScoreKeeper"]
+visible = false
+position = Vector2(25, 15)
+texture = ExtResource("4_i0jlg")
+
+[node name="player2_set_light" type="Sprite2D" parent="Sprite2D/ScoreKeeper"]
+visible = false
+position = Vector2(82, 15)
+texture = ExtResource("4_i0jlg")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 60.0
+one_shot = true
+autostart = true

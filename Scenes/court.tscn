@@ -1,96 +1,26 @@
-[gd_scene load_steps=13 format=3 uid="uid://dyenm6yugkrnq"]
+[gd_scene load_steps=6 format=3 uid="uid://dyenm6yugkrnq"]
 
-[ext_resource type="Texture2D" uid="uid://b33ot4vwbg3jk" path="res://Assets/court.png" id="1_4jav1"]
-[ext_resource type="Script" path="res://Scripts/wall.gd" id="2_8bkxt"]
+[ext_resource type="Texture2D" uid="uid://d32jb8dbdkn1q" path="res://Assets/court.png" id="1_4jav1"]
 [ext_resource type="AudioStream" uid="uid://cchuy1ftuxwoy" path="res://Assets/Retro Impact Punch Hurt 01.wav" id="3_pa3wh"]
-[ext_resource type="PackedScene" uid="uid://2j7cbyw1wrhd" path="res://goal.tscn" id="4_484f4"]
-[ext_resource type="Texture2D" uid="uid://d15belsw027ln" path="res://Assets/bumper-Sheet.png" id="4_k7jmp"]
-
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_351wq"]
-a = Vector2(2.08165e-12, -150)
-b = Vector2(2.08165e-12, 150)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_n1oag"]
-size = Vector2(274.375, 9.5)
-
-[sub_resource type="Animation" id="Animation_bhvby"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [2]
-}
-
-[sub_resource type="Animation" id="Animation_omj56"]
-resource_name = "hit"
-step = 0.01
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.01, 0.02, 0.03, 0.04, 0.07, 0.09, 0.11, 0.14, 0.16, 0.21, 0.25, 0.3, 0.36, 0.42, 0.52),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [2, 3, 0, 1, 2, 3, 0, 1, 2, 3, 0, 1, 2, 3, 3, 0]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_dtf7f"]
-_data = {
-"RESET": SubResource("Animation_bhvby"),
-"hit": SubResource("Animation_omj56")
-}
+[ext_resource type="PackedScene" uid="uid://2j7cbyw1wrhd" path="res://Scenes/goal.tscn" id="4_484f4"]
+[ext_resource type="PackedScene" uid="uid://d57h7j0h1oa4" path="res://Scenes/Wall.tscn" id="4_rnn8x"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_31amf"]
 b = Vector2(2.08165e-12, 120)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_egcr3"]
-size = Vector2(272, 8)
 
 [node name="Court" type="Node2D"]
 position = Vector2(2.08165e-12, 2.08165e-12)
 
 [node name="Court" type="Sprite2D" parent="."]
-position = Vector2(2.08165e-12, 2.08165e-12)
+position = Vector2(-39.5, 2.08165e-12)
 texture = ExtResource("1_4jav1")
 centered = false
 
-[node name="TopWall" type="StaticBody2D" parent="."]
-y_sort_enabled = true
-position = Vector2(160, 42)
-script = ExtResource("2_8bkxt")
+[node name="TopWall" parent="." instance=ExtResource("4_rnn8x")]
+position = Vector2(161.978, 40)
 
-[node name="Boundry" type="CollisionShape2D" parent="TopWall"]
-position = Vector2(2.08165e-12, 2.08165e-12)
-rotation = 1.5708
-shape = SubResource("SegmentShape2D_351wq")
-
-[node name="Area2D" type="Area2D" parent="TopWall"]
-position = Vector2(0.659851, 0)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="TopWall/Area2D"]
-position = Vector2(2.08165e-12, 2.08165e-12)
-shape = SubResource("RectangleShape2D_n1oag")
-
-[node name="Sprite2D" type="Sprite2D" parent="TopWall"]
-position = Vector2(2.08165e-12, 2.08165e-12)
-texture = ExtResource("4_k7jmp")
-hframes = 4
-frame = 2
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="TopWall"]
-libraries = {
-"": SubResource("AnimationLibrary_dtf7f")
-}
+[node name="BotWall" parent="." instance=ExtResource("4_rnn8x")]
+position = Vector2(161.978, 156.813)
 
 [node name="Net" type="StaticBody2D" parent="."]
 position = Vector2(159.975, 36.9798)
@@ -102,36 +32,11 @@ position = Vector2(0, 3.85341)
 shape = SubResource("SegmentShape2D_31amf")
 
 [node name="RightGoal" parent="." instance=ExtResource("4_484f4")]
+position = Vector2(310, 160)
 
 [node name="LeftGoal" parent="." instance=ExtResource("4_484f4")]
-position = Vector2(10, 96)
+position = Vector2(10, 160)
 scale = Vector2(-1, 1)
-
-[node name="BottomWall" type="StaticBody2D" parent="."]
-y_sort_enabled = true
-position = Vector2(160, 160)
-script = ExtResource("2_8bkxt")
-
-[node name="Boundry" type="CollisionShape2D" parent="BottomWall"]
-position = Vector2(2.08165e-12, -0.366257)
-rotation = 1.5708
-shape = SubResource("SegmentShape2D_351wq")
-
-[node name="Area2D" type="Area2D" parent="BottomWall"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BottomWall/Area2D"]
-position = Vector2(2.08165e-12, 2.08165e-12)
-shape = SubResource("RectangleShape2D_egcr3")
-
-[node name="Sprite2D" type="Sprite2D" parent="BottomWall"]
-texture = ExtResource("4_k7jmp")
-hframes = 4
-frame = 2
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="BottomWall"]
-libraries = {
-"": SubResource("AnimationLibrary_dtf7f")
-}
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_pa3wh")
@@ -143,8 +48,5 @@ position = Vector2(32.2464, 99.8567)
 
 [node name="P2StartLocation" type="Node2D" parent="StartLocations"]
 position = Vector2(289.567, 94.4776)
-
-[connection signal="body_entered" from="TopWall/Area2D" to="TopWall" method="_on_area_2d_body_entered"]
-[connection signal="body_entered" from="BottomWall/Area2D" to="BottomWall" method="_on_area_2d_body_entered"]
 
 [editable path="LeftGoal"]

@@ -1,6 +1,5 @@
 extends Node
 
-var gameManager = preload("res://Scripts/GameManager.tres")
 var main_menu = preload("res://Scenes/main_menu.tscn")
 
 var p1_set_count = 0
@@ -15,12 +14,14 @@ var disc_in_play = true
 var one_time = false
 var players_in_place = 0
 
+var goal_dir = 1
 
-@export var Ball : PackedScene
+
+@export var Ball = load("res://Scenes/ball.tscn")
 @onready var Server = $Server
 @onready var players = $Court/Players
 @onready var starting_locs = $Court/StartLocations
-@onready var bot_wall = $Court/BottomWall
+@onready var bot_wall = $Court/BotWall
 
 @onready var anim_player = $AnimationPlayer
 
@@ -40,6 +41,7 @@ func _ready():
 func _process(_delta):
 	game_check()
 	set_check()
+	time_check()
 
 func _physics_process(delta):
 	if players_should_reset:
@@ -59,25 +61,20 @@ func _physics_process(delta):
 	
 		if !one_time:
 			# increment path follower ratio 
-			PathFollow.progress_ratio += 0.08
+			PathFollow.progress_ratio += 0.08 * goal_dir
 			
 		else:
-			PathFollow.progress_ratio -= 0.02
-			print("going back")
+			PathFollow.progress_ratio -= 0.025 * goal_dir
 		
 			
-		if PathFollow.progress_ratio >= 0.5 and !one_time:
-
-			print("ONE TIME")
+		if PathFollow.progress_ratio >= (0.75 * goal_dir) and !one_time:
 			await get_tree().create_timer(1).timeout
 			one_time = true
-			print("PASS TIMER")
 			
-		if PathFollow.progress_ratio <= 0.0:
+		if   PathFollow.progress_ratio > 0.49 and PathFollow.progress_ratio < 0.51:
+			PathFollow.progress_ratio = 0.50
 			camera_move = false
 			one_time = false
-
-				# possible decrement the ratio back to 0
 
 
 func ball_spawn():
@@ -147,9 +144,7 @@ func _on_player_1_goal_body_entered(body):
 		var goal = $Court/LeftGoal
 		
 		await play_goal_sequence(disc, goal)
-		
 		ScoreBoard.player_2_scored()
-		
 		set_flags_for_goal()
 
 
@@ -158,16 +153,14 @@ func _on_player_2_goal_body_entered(body):
 		var disc = body
 		var goal = $Court/RightGoal
 		
-		move_camera_for_goal()
-		
+
 		await play_goal_sequence(disc, goal)
-		
 		ScoreBoard.player_1_scored()
-		
 		set_flags_for_goal()
 
 
 func play_goal_sequence(disc, goal):
+	move_camera_for_goal(goal)
 	disc.dead_ball()
 	Camera.shake()
 	await goal.play_goal()
@@ -179,5 +172,29 @@ func set_flags_for_goal():
 	disc_in_play = false
 	serve_dir = serve_right
 
-func move_camera_for_goal():
+func move_camera_for_goal(goal):
+	if goal == $Court/LeftGoal:
+		goal_dir = -1
+	else:
+		goal_dir = 1
+		
 	camera_move = true
+	
+func time_check():
+	# check if the time is at zero for the scoreboard
+	if int(ScoreBoard.get_time()) == 0:
+	
+		# check if p1 has the greater score
+		if ScoreBoard.get_player_1_score() > ScoreBoard.get_player_2_score():
+			p1_set_count += 1
+			ScoreBoard.player_1_set_win()
+			set_flags_for_goal()
+			
+		# otherwise give p2 the set
+		else:
+			p2_set_count += 1
+			ScoreBoard.player_2_set_win()
+			set_flags_for_goal()
+			
+		ScoreBoard.start_time(60)
+		
