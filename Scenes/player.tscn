@@ -308,9 +308,6 @@ libraries = {
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 root_node = NodePath("../Sprite2D")
-libraries = {
-"": SubResource("AnimationLibrary_r57pd")
-}
 tree_root = SubResource("AnimationNodeStateMachine_i8pvp")
 anim_player = NodePath("../AnimationPlayer")
 parameters/conditions/is_idle = false
