@@ -79,8 +79,7 @@ y_sort_enabled = true
 position = Vector2(0, -1)
 
 [node name="Court" parent="Court" index="0"]
-position = Vector2(-39, 2.08165e-12)
-metadata/_edit_lock_ = true
+position = Vector2(-239.5, -86)
 
 [node name="Net" parent="Court" index="3"]
 position = Vector2(160, 37)

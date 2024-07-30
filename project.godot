@@ -26,6 +26,7 @@ window/stretch/mode="canvas_items"
 [editor]
 
 movie_writer/mjpeg_quality=1.0
+movie_writer/movie_file="/home/zack/Videos/Splash_Screen.avi"
 movie_writer/disable_vsync=true
 
 [importer_defaults]

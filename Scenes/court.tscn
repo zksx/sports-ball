@@ -12,7 +12,7 @@ b = Vector2(2.08165e-12, 120)
 position = Vector2(2.08165e-12, 2.08165e-12)
 
 [node name="Court" type="Sprite2D" parent="."]
-position = Vector2(-39.5, 2.08165e-12)
+position = Vector2(-239.5, -88)
 texture = ExtResource("1_4jav1")
 centered = false
 
