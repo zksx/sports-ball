@@ -37,6 +37,7 @@ func launch(vector):
 	play_spin_anim()
 	audio_player.play()
 
+# test
 func start_curve(weight, curve_speed):
 	y_weight = weight
 	is_curving = true
