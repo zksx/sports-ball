@@ -1,11 +1,6 @@
 name: Build Godot Game
 run-name: ${{ github.actor }} is testing the Godot build
-
-on: 
-  push:
-    tags:
-      - "v*"
-
+on: [push]
 jobs:
   export_game:
     runs-on: ubuntu-latest
