@@ -29,9 +29,12 @@ jobs:
         tag: ${{ github.ref_name }}
         artifacts: ${{ steps.export.outputs.archive_directory }}/*
 
+    - name: List files in archive directory
+      run: ls -l ${{ steps.export.outputs.archive_directory }}
+
     - name: itch web push
       uses: yeslayla/butler-publish-itchio-action@v1.0.3
-      with:
+      env:
         BUTLER_CREDENTIALS: ${{ secrets.BUTLER_CREDENTIALS }}
         CHANNEL: HTML5
         ITCH_GAME: sports-ball
