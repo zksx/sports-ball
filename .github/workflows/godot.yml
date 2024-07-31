@@ -30,12 +30,14 @@ jobs:
         tag: ${{ github.ref_name }}
         artifacts: ${{ steps.export.outputs.archive_directory }}/*
 
-    - name: itch push
+    - name: itch web push
       uses: yeslayla/butler-publish-itchio-action@v1.0.3
       env:
         BUTLER_CREDENTIALS: ${{ secrets.BUTLER_CREDENTIALS }}
-        CHANNEL: linux
+        CHANNEL: HTML5
         ITCH_GAME: sports-ball
         ITCH_USER: zksx
-        PACKAGE: Builds/linux
+        PACKAGE: Builds/web.zip
+
+    
       
