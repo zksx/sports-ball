@@ -31,7 +31,7 @@ jobs:
 
     - name: itch web push
       uses: yeslayla/butler-publish-itchio-action@v1.0.3
-      env:
+      with:
         BUTLER_CREDENTIALS: ${{ secrets.BUTLER_CREDENTIALS }}
         CHANNEL: HTML5
         ITCH_GAME: sports-ball
