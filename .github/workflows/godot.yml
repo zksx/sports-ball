@@ -33,7 +33,7 @@ jobs:
       run: ls -l ${{ steps.export.outputs.archive_directory }}
 
     - name: itch web push
-    - uses: Ayowel/butler-to-itch@v1
+      uses: Ayowel/butler-to-itch@v1
       with:
         butler_key: ${{ secrets.BUTLER_CREDENTIALS }}
         itch_user: zksx
