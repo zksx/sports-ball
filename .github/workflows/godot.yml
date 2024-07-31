@@ -36,5 +36,5 @@ jobs:
         CHANNEL: HTML5
         ITCH_GAME: sports-ball
         ITCH_USER: zksx
-        PACKAGE: archives/SportsBall-Web.zip
+        PACKAGE: ${{ steps.export.outputs.archive_directory }}/SportsBall-Web.zip
 
