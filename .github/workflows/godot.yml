@@ -37,5 +37,5 @@ jobs:
         CHANNEL: windows
         ITCH_GAME: sports-ball
         ITCH_USER: zksx
-        PACKAGE: Builds/windows
+        PACKAGE: Builds/windows-linux
       
