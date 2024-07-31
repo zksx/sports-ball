@@ -33,11 +33,13 @@ jobs:
       run: ls -l ${{ steps.export.outputs.archive_directory }}
 
     - name: itch web push
-      uses: yeslayla/butler-publish-itchio-action@v1.0.3
-      env:
-        BUTLER_CREDENTIALS: ${{ secrets.BUTLER_CREDENTIALS }}
-        CHANNEL: HTML5
-        ITCH_GAME: sports-ball
-        ITCH_USER: zksx
-        PACKAGE: ${{ steps.export.outputs.archive_directory }}/SportsBall-Web.zip
-
+    - uses: Ayowel/butler-to-itch@v1
+      with:
+        butler_key: ${{ secrets.BUTLER_CREDENTIALS }}
+        itch_user: zksx
+        itch_game: sports-ball
+        version: ${{ github.ref_name }}
+        # We assume that we have the following files in ./build:
+        # release-linux.tar.gz, release-windows.zip,
+        # release-mac.zip, java-release.apk
+        files: "${{ steps.export.outputs.archive_directory }}/SportsBall-Web.zip"
