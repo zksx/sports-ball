@@ -36,4 +36,5 @@ jobs:
         CHANNEL: HTML5
         ITCH_GAME: sports-ball
         ITCH_USER: zksx
-        PACKAGE: archive_output/SportsBall-Web.zip
+        PACKAGE: archives/SportsBall-Web.zip
+
