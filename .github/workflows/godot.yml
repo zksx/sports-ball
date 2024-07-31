@@ -20,7 +20,6 @@ jobs:
         relative_project_path: ./
         archive_output: true
 
-        
     # adds a release to the release page
     - name: create release
       uses: ncipollo/release-action@v1.12.0
@@ -37,7 +36,7 @@ jobs:
         CHANNEL: HTML5
         ITCH_GAME: sports-ball
         ITCH_USER: zksx
-        PACKAGE: Builds/web.zip
+        PACKAGE: archive_output/SportsBall-Web.zip
 
     
       
