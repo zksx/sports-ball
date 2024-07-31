@@ -34,7 +34,7 @@ jobs:
       uses: yeslayla/butler-publish-itchio-action@v1.0.3
       env:
         BUTLER_CREDENTIALS: ${{ secrets.BUTLER_CREDENTIALS }}
-        CHANNEL: windows
+        CHANNEL: linux
         ITCH_GAME: sports-ball
         ITCH_USER: zksx
         PACKAGE: Builds/linux
