@@ -82,7 +82,7 @@ func ball_spawn():
 	add_child(ball)
 	ball.serve()
 
-
+# a quick test
 func game_check():
 	if( ScoreBoard.get_player_1_score() >= 3):
 
