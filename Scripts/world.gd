@@ -76,7 +76,7 @@ func _physics_process(delta):
 			camera_move = false
 			one_time = false
 
-
+# useless comment
 func ball_spawn():
 	var ball = Ball.instantiate()
 	add_child(ball)
