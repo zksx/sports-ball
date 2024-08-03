@@ -46,4 +46,4 @@ jobs:
         # We assume that we have the following files in ./build:
         # release-linux.tar.gz, release-windows.zip,
         # release-mac.zip, java-release.apk
-        files: /home/runner/.local/share/godot/builds/SportsBall-*/*
+        files: "${{ steps.export.outputs.archive_directory }}/SportsBall-*"
